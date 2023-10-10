@@ -14,9 +14,9 @@ class Sudoku() {
     constructor(initialGrid: List<List<Int>>): this() {
         require(initialGrid.size == n && initialGrid.all { it.size == n }) {
             "Initial grid needs to be a $n times $n grid." }
-        for (i in 0 until n) {
-            for (j in 0 until n) {
-                grid[i][j] = initialGrid[i][j]
+        for (row in 0 until n) {
+            for (col in 0 until n) {
+                setValue(row, col, initialGrid[row][col])
             }
         }
     }
@@ -28,9 +28,9 @@ class Sudoku() {
      * @param value the value to be set.
      */
     fun setValue(row: Int, col: Int, value: Int) {
-        requireDimensions(row, col)
-        requireValue(value)
-        require(isValid(row, col, value)) {
+        require(value in 0..n) {
+            "The value must be between 0 and $n inclusive, not $value"}
+        require(value == 0 || isValid(row, col, value)) {
             "The position ($row, $col) is not valid for the value $value."
         }
         grid[row][col] = value
@@ -43,7 +43,6 @@ class Sudoku() {
      * @return the value of the cell.
      */
     fun getValue(row: Int, col: Int): Int {
-        requireDimensions(row, col)
         return grid[row][col]
     }
 
@@ -171,22 +170,13 @@ class Sudoku() {
         values.sortBy { pair -> pair.first  }
         return values
     }
-    private fun requireDimensions(row: Int, col: Int) {
-        require(row in 0 until n && col in 0 until n) {
-            "Row and column indices must be within grid dimensions ($n times $n)."
-        }
-    }
-
-    private fun requireValue(value: Int) {
-        require(value in 1..n) { "The value must be between 1 and $n inclusive."}
-    }
 
     override fun toString(): String {
         val sb = StringBuilder()
         for (row in 0 until n) {
-            if (row % 3 == 0 && row != 0) sb.append("--------\n")
+            if (row % 3 == 0 && row != 0) sb.append("---------------------\n")
             for (col in 0 until n) {
-                if (col % 3 == 0 && col != 0) sb.append(" |")
+                if (col % 3 == 0 && col != 0) sb.append("| ")
                 sb.append(grid[row][col]).append(' ')
             }
             sb.append('\n')
