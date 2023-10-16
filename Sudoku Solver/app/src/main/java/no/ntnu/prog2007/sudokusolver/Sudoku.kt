@@ -6,6 +6,8 @@ package no.ntnu.prog2007.sudokusolver
 class Sudoku() {
     private val n = 9
     private val grid = List(n) { MutableList(n) { 0 } }
+    var recursions = -1
+        private set
 
     /**
      * Makes a sudoku grid based on an initial grid.
@@ -51,18 +53,19 @@ class Sudoku() {
      * @return true if the grid was solved or false if the grid is unsolvable.
      */
     fun solve(): Boolean {
+        recursions++
         val cell = findLeastSolutionCell()
         val row = cell.first
         val col = cell.second
         if (row == -1 || col == -1) return true             // found a solution (no empty cells)
         val values = findValidValuesSortConflict(row, col)
-        return values.any { // returns if any of the values returns true
+        values.forEach {
             val value = it.second
-            grid[row][col] = value      // set the value at the cell
-            if (solve()) return true    // find out if it solves
-            grid[row][col] = 0          // if not set the cell as empty and return false
-            return false
+            grid[row][col] = value
+            if (solve()) return true
+            grid[row][col] = 0
         }
+        return false
     }
 
     /**
