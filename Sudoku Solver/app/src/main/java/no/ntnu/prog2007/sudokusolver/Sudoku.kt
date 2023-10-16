@@ -4,9 +4,13 @@ package no.ntnu.prog2007.sudokusolver
  * Represents a sudoku grid.
  */
 class Sudoku() {
+
     private val n = 9
     private val grid = List(n) { MutableList(n) { 0 } }
-    var recursions = -1
+    var solved = false
+        private set
+    private var multipleSolutions = false
+    var solution = List(n) { List(n) { 0 } }
         private set
 
     /**
@@ -49,11 +53,53 @@ class Sudoku() {
     }
 
     /**
-     * Solves the sudoku grid.
+     * Solves the sudoku grid. Checks if there are more than one solution.
+     */
+    fun solve() {
+        val cell = findLeastSolutionCell()
+        val row = cell.first
+        val col = cell.second
+        if (row == -1 || col == -1) {   // found a solution (no empty cells)
+            if (solved) {
+                solution = emptyList()
+                multipleSolutions = true
+                solved = false
+            } else {
+                solution = grid.copy()
+                solved = true
+            }
+        } else {
+            val values = findValidValuesSortConflict(row, col)
+            values.forEach {
+                val value = it.second
+                grid[row][col] = value
+                solve()
+                if (multipleSolutions) return
+                grid[row][col] = 0
+            }
+        }
+    }
+
+    /**
+     * Replicates a grid.
+     * @return the replicated grid.
+     */
+    private fun List<List<Int>>.copy(): List<List<Int>> {
+        val copiedGrid = mutableListOf<MutableList<Int>>()
+
+        for (row in this) {
+            val newRow = row.toMutableList()
+            copiedGrid.add(newRow)
+        }
+
+        return copiedGrid
+    }
+
+    /**
+     * Solves the sudoku grid. Finds the first solution and changes the grid to it.
      * @return true if the grid was solved or false if the grid is unsolvable.
      */
-    fun solve(): Boolean {
-        recursions++
+    fun solveFindFirst(): Boolean {
         val cell = findLeastSolutionCell()
         val row = cell.first
         val col = cell.second
@@ -62,7 +108,7 @@ class Sudoku() {
         values.forEach {
             val value = it.second
             grid[row][col] = value
-            if (solve()) return true
+            if (solveFindFirst()) return true
             grid[row][col] = 0
         }
         return false
@@ -174,8 +220,7 @@ class Sudoku() {
         return values
     }
 
-    override fun toString(): String {
-        val sb = StringBuilder()
+    private fun gridToSting(sb: StringBuilder, grid: List<List<Int>>) {
         for (row in 0 until n) {
             if (row % 3 == 0 && row != 0) sb.append("---------------------\n")
             for (col in 0 until n) {
@@ -184,6 +229,17 @@ class Sudoku() {
             }
             sb.append('\n')
         }
+    }
+
+    fun solutionToString(): String {
+        val sb = StringBuilder()
+        gridToSting(sb, solution)
+        return sb.toString()
+    }
+
+    override fun toString(): String {
+        val sb = StringBuilder()
+        gridToSting(sb, grid)
         return sb.toString()
     }
 }

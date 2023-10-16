@@ -75,7 +75,7 @@ class SudokuUnitTest {
 
     @Test
     fun testSolve_solvable() {
-        val sudoku = Sudoku(
+        testSudoku(
         listOf(
             listOf(5, 3, 0, /*|*/ 0, 7, 0, /*|*/ 0, 0, 0),
             listOf(6, 0, 0, /*|*/ 1, 9, 5, /*|*/ 0, 0, 0),
@@ -88,22 +88,8 @@ class SudokuUnitTest {
             listOf(0, 6, 0, /*|*/ 0, 0, 0, /*|*/ 2, 8, 0),
             listOf(0, 0, 0, /*|*/ 4, 1, 9, /*|*/ 0, 0, 5),
             listOf(0, 0, 0, /*|*/ 0, 8, 0, /*|*/ 0, 7, 9),
+            )
         )
-    )
-        print(sudoku.toString())
-        val startTime = System.currentTimeMillis()
-        assertTrue(sudoku.solve())
-        val time = System.currentTimeMillis() - startTime
-        println("Solution time: $time ms")
-        println("${sudoku.recursions} recursions")
-        print(sudoku.toString())
-        val counts = List(9) { 0 }.toMutableList()
-        for (row in 0 until 9) {
-            for (col in 0 until 9) {
-                counts[sudoku.getValue(row, col) - 1]++
-            }
-        }
-        counts.forEach { assertEquals(9, it) }
     }
 
     @Test
@@ -138,24 +124,24 @@ class SudokuUnitTest {
                 listOf(0, 0, 0, /*|*/ 0, 0, 0, /*|*/ 0, 7, 9),
             )
         )
-        assertTrue(!sudoku.solve())
+        sudoku.solve()
+        assertTrue(!sudoku.solved)
     }
 
     private fun testSudoku(grid: List<List<Int>>) {
         val sudoku = Sudoku(grid)
-        print(sudoku.toString())
         val startTime = System.currentTimeMillis()
         sudoku.solve()
         val time = System.currentTimeMillis() - startTime
-        println("Solution time: $time ms")
-        println("${sudoku.recursions} recursions")
-        print(sudoku.toString())
+        println("Solution time: $time ms:")
+        assertTrue(sudoku.solved)
         val counts = List(9) { 0 }.toMutableList()
-        for (row in 0 until 9) {
-            for (col in 0 until 9) {
-                counts[sudoku.getValue(row, col) - 1]++
+        for (row in sudoku.solution) {
+            for (value in row) {
+                counts[value - 1]++
             }
         }
         counts.forEach { assertEquals(9, it) }
+        print(sudoku.solutionToString())
     }
 }
