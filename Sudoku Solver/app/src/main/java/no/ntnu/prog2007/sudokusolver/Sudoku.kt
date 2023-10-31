@@ -103,7 +103,11 @@ class Sudoku() {
         val cell = findLeastSolutionCell()
         val row = cell.first
         val col = cell.second
-        if (row == -1 || col == -1) return true             // found a solution (no empty cells)
+        if (row == -1 || col == -1) {
+            solution = grid.copy()
+            solved = true
+            return true
+        }             // found a solution (no empty cells)
         val values = findValidValuesSortConflict(row, col)
         values.forEach {
             val value = it.second
