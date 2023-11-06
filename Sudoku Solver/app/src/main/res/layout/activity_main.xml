@@ -7,20 +7,38 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Welcome to the sudoku solver!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.16" />
 
     <Button
-        android:id="@+id/scanButton"
+        android:id="@+id/insertButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan sudoku"
+        android:text="Insert sudoku"
         tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="503dp" />
+        tools:layout_editor_absoluteY="227dp" />
+
+    <Button
+        android:id="@+id/galleryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find sudoku from gallery"
+        tools:layout_editor_absoluteX="102dp"
+        tools:layout_editor_absoluteY="322dp" />
+
+    <Button
+        android:id="@+id/infoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get more info about this app"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="468dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
