@@ -8,6 +8,8 @@ import java.io.IOException
 
 /**
  * Manages the reading, writing and deletion of files.
+ * Reference for the file formats:
+ * https://sudopedia.sudocue.net/index.php/Sudoku_Clipboard_and_File_Formats
  */
 class FileManager {
     companion object {
@@ -15,23 +17,161 @@ class FileManager {
         /**
          * Reads from the file at the specified path.
          * @param filePath the path of the file to read
-         * @return the content of the file as string or null if it could not read the file
+         * @return the content of the file as a grid of integers
+         * or null if it could not read the file
          */
-        fun readFile(filePath: String): String? {
+        fun readFile(filePath: String): List<List<Int>>? {
             val file = File(filePath)
-            val sb = StringBuilder()
+            if (!file.isFile) return null
+            return when(file.extension.lowercase()) {
+                "msk", "sol"    -> { readFileMSKAndSOL(file) }
+                "sdk"           -> { readFileSDK(file) }
+                "sdm", "txt"    -> { readFileTXTAndSDM(file) }
+                "spf", "ss"     -> { readFileSPFAndSS(file) }
+                else            -> { null }
+            }
+        }
 
+        /**
+         * Checks if the char is a valid sudoku digit.
+         * @return true if it is a valid sudoku digit or false if not
+         */
+        private fun Char.isValidSudokuDigit() = this in '0'..'9'
+                || this == '.' || this == 'X'
+
+        /**
+         * Parses the char to integer that is a sudoku digit.
+         * @return the sudoku digit.
+         */
+        private fun Char.toSudokuDigit(): Int {
+            if (this == '.' || this == 'X') return 0
+            return this.toString().toInt()
+        }
+
+        /**
+         * Reads files that are in the VBForums Contest format
+         * @param file to be read
+         * @return the resulting sudoku grid or null if it could not read the file
+         */
+        private fun readFileMSKAndSOL(file: File): List<List<Int>>? {
             try {
+                val grid = List(9) { MutableList(9) { 0 } }
                 val reader = BufferedReader(FileReader(file))
                 var line: String?
-                while (reader.readLine().also { line = it } != null) {
-                    sb.append(line)
+                var rowIndex = 0
+                while (reader.readLine().also { line = it } != null
+                    && rowIndex < 9) {
+                    if (line!!.length < 9) return null
+
+                    for (colIndex in 0 until 9) {
+                        val char = line!![colIndex]
+                        if (!char.isValidSudokuDigit()) return null
+                        grid[rowIndex][colIndex] = char.toSudokuDigit()
+                    }
+                    rowIndex++
                 }
                 reader.close()
+                return grid
             } catch (e: IOException) {
                 return null
             }
-            return sb.toString()
+        }
+
+        /**
+         * Reads files that are in the SadMan Software Sudoku format
+         * @param file to be read
+         * @return the resulting sudoku grid or null if it could not read the file
+         */
+        private fun readFileSDK(file: File): List<List<Int>>? {
+            try {
+                val grid = List(9) { MutableList(9) { 0 } }
+                val reader = BufferedReader(FileReader(file))
+                var line: String?
+                var rowIndex = 0
+                var puzzleStarted = false
+                while (reader.readLine().also { line = it } != null
+                    && rowIndex < 9) {
+                    if (line!!.contains("[Puzzle]") && !puzzleStarted) {
+                        puzzleStarted = true
+                        continue
+                    }
+                    if (!puzzleStarted) continue
+                    if (line!!.length < 9) return null
+
+                    for (colIndex in 0 until 9) {
+                        val char = line!![colIndex]
+                        if (!char.isValidSudokuDigit()) return null
+                        grid[rowIndex][colIndex] = char.toSudokuDigit()
+                    }
+                    rowIndex++
+                }
+                reader.close()
+                return grid
+            } catch (e: IOException) {
+                return null
+            }
+        }
+
+        /**
+         * Reads files that are in the Sudoku Puzzle Collection or txt format
+         * @param file to be read
+         * @return the resulting sudoku grid or null if it could not read the file
+         */
+        private fun readFileTXTAndSDM(file: File): List<List<Int>>? {
+            return try {
+                val grid = List(9) { MutableList(9) { 0 } }
+                val reader = BufferedReader(FileReader(file))
+                var line: String?
+                var foundLine = false
+                while (reader.readLine().also { line = it } != null && !foundLine) {
+                    if (line!!.length < 81 || !line!!.all { it.isValidSudokuDigit() })
+                        continue
+                    foundLine = true
+                    var index = 0
+                    line!!.forEach { char ->
+                        grid[index / 9][index % 9] = char.toSudokuDigit()
+                        index++
+                    }
+                }
+                reader.close()
+                grid
+            } catch (e: IOException) {
+                null
+            }
+        }
+
+        /**
+         * Reads files that are in the SuDoku Solver format or Simple Sudoku format
+         * @param file to be read
+         * @return the resulting sudoku grid or null if it could not read the file
+         */
+        private fun readFileSPFAndSS(file: File): List<List<Int>>? {
+            try {
+                val grid = List(9) { MutableList(9) { 0 } }
+                val reader = BufferedReader(FileReader(file))
+                var line: String?
+                var rowIndex = 0
+                while (reader.readLine().also { line = it } != null
+                    && rowIndex < 9) {
+                    if (line!![0] == '-' || line!![2] == '-') continue
+                    if (line!!.length < 9) return null
+                    var colIndex = 0
+                    var charIndex = 0
+                    while (colIndex < 9 && charIndex < line!!.length ) {
+                        val char = line!![charIndex]
+                        if (char.isValidSudokuDigit()) {
+                            grid[rowIndex][colIndex] = char.toSudokuDigit()
+                            colIndex++
+                        }
+                        charIndex++
+                    }
+                    rowIndex++
+                }
+                reader.close()
+                return grid
+            } catch (e: IOException) {
+                return null
+            }
         }
 
         /**
