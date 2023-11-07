@@ -194,6 +194,43 @@ class FileManager {
         }
 
         /**
+         * Writes a sudoku grid to file with the SuDoku Solver format at specified path.
+         * @param filePath the path of the file to write to
+         * @param grid the sudoku grid to write to file
+         * @return true if it was successful in writing to the file or false if not
+         */
+        fun writeFileSPF(filePath: String, grid: List<List<Int>>): Boolean {
+            val file = File(filePath)
+
+            return try {
+                val writer = FileWriter(file)
+                for (i in 0 until 9) {
+                    for (j in 0 until 9) {
+                        val value = grid[i][j]
+                        if (value == 0) {
+                            writer.write(". ")
+                        } else {
+                            writer.write("$value ")
+                        }
+
+                        if (j == 2 || j == 5) {
+                            writer.write("| ")
+                        }
+                    }
+                    writer.write("\r\n")
+
+                    if (i == 2 || i == 5) {
+                        writer.write("------+-------+------\r\n")
+                    }
+                }
+                writer.close()
+                true
+            } catch (e: IOException) {
+                false
+            }
+        }
+
+        /**
          * Deletes the file at specified path.
          * @param filePath the path of the file to delete
          * @return true if it was successfully deleted or false if not

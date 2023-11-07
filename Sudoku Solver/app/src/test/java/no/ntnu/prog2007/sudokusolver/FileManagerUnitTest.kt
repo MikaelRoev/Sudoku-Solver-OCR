@@ -140,6 +140,14 @@ class FileManagerUnitTest {
     }
 
     @Test
+    fun testWriteFileSPF() {
+        val fileName = "testWrite.spf"
+        fileNames.add(fileName)
+        assertTrue(FileManager.writeFileSPF(fileName, resultingGrid))
+        assertEquals(resultingGrid, FileManager.readFile(fileName))
+    }
+
+    @Test
     fun testReadFile_unexistingFile() {
         assertNull(FileManager.readFile("unexistingTestFile.txt"))
     }
