@@ -153,6 +153,24 @@ class FileManagerUnitTest {
     }
 
     @Test
+    fun testReadFile_unsupportedFileType() {
+        val fileName = "test.bob"
+        assertTrue(FileManager.writeFile(fileName,
+            "[Puzzle]\r\n"+
+                    "800000000\r\n" +
+                    "003600000\r\n" +
+                    "070090200\r\n" +
+                    "050007000\r\n" +
+                    "000045700\r\n" +
+                    "000100030\r\n" +
+                    "001000068\r\n" +
+                    "008500010\r\n" +
+                    "090000400"))
+        fileNames.add(fileName)
+        assertNull(FileManager.readFile(fileName))
+    }
+
+    @Test
     fun deleteFile_unexistingFile() {
         assertTrue(!FileManager.deleteFile("unexistingTestFile.txt"))
     }
