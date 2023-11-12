@@ -1,10 +1,13 @@
 package no.ntnu.prog2007.sudokusolver
 
+import android.util.Log
 import java.io.BufferedReader
 import java.io.File
+import java.io.FileOutputStream
 import java.io.FileReader
 import java.io.FileWriter
 import java.io.IOException
+import java.io.InputStream
 
 /**
  * Manages the reading, writing and deletion of files.
@@ -13,15 +16,57 @@ import java.io.IOException
  */
 class FileManager {
     companion object {
+        private val supportedFileExtensions = arrayOf(
+            "msk", "sol", "sdk", "sdm", "txt", "spf", "ss"
+        )
 
         /**
-         * Reads from the file at the specified path.
-         * @param filePath the path of the file to read
+         * Copies an input stream into a file.
+         * @param inputStream to copy
+         * @param file to copy to
+         */
+        private fun copyInputStreamToFile(inputStream: InputStream, file: File) {
+            try {
+                FileOutputStream(file, false).use { outputStream ->
+                    var read: Int
+                    val bytes = ByteArray(DEFAULT_BUFFER_SIZE)
+                    while (inputStream.read(bytes).also { read = it} != -1) {
+                        outputStream.write(bytes, 0, read)
+                    }
+                }
+            } catch (e: IOException) {
+                Log.e("Failed to load file:", e.message.toString())
+            }
+        }
+
+        /**
+         * Checks if a file type is supported by this file manager.
+         * @param fileExtension is the file type to check
+         * @return true if the file type is supported.
+         */
+        fun isSupportedFileType(fileExtension: String) =
+            supportedFileExtensions.contains(fileExtension)
+
+        /**
+         * Reads from the input stream
+         * @param inputStream to read
+         * @param fileType the file extension to read it as
+         * @return the content of the input stream as a grid of integers
+         * or null if it could not read the input stream
+         */
+        fun readInputStream(inputStream: InputStream, fileType: String): List<List<Int>>? {
+            val tempFile = File.createTempFile("temp", ".$fileType")
+            copyInputStreamToFile(inputStream, tempFile)
+            return readFile(tempFile)
+        }
+
+        /**
+         * Reads from the file
+         * @param file to read
          * @return the content of the file as a grid of integers
          * or null if it could not read the file
          */
-        fun readFile(filePath: String): List<List<Int>>? {
-            val file = File(filePath)
+        fun readFile(file: File): List<List<Int>>? {
             if (!file.isFile) return null
             return when(file.extension.lowercase()) {
                 "msk", "sol"    -> { readFileMSKAndSOL(file) }

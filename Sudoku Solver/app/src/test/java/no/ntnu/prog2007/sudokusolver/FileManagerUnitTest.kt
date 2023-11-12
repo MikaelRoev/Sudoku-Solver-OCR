@@ -5,6 +5,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.io.File
 
 class FileManagerUnitTest {
 
@@ -44,7 +45,7 @@ class FileManagerUnitTest {
                 "008500010\r\n" +
                 "090000400"))
         fileNames.add(fileName)
-        assertEquals(resultingGrid, FileManager.readFile(fileName))
+        assertEquals(resultingGrid, FileManager.readFile(File(fileName)))
     }
 
     @Test
@@ -61,7 +62,7 @@ class FileManagerUnitTest {
                     "008500010\r\n" +
                     "090000400"))
         fileNames.add(fileName)
-        assertEquals(resultingGrid, FileManager.readFile(fileName))
+        assertEquals(resultingGrid, FileManager.readFile(File(fileName)))
     }
 
     @Test
@@ -79,7 +80,7 @@ class FileManagerUnitTest {
                     "008500010\r\n" +
                     "090000400"))
         fileNames.add(fileName)
-        assertEquals(resultingGrid, FileManager.readFile(fileName))
+        assertEquals(resultingGrid, FileManager.readFile(File(fileName)))
     }
 
     @Test
@@ -88,7 +89,7 @@ class FileManagerUnitTest {
         assertTrue(FileManager.writeFile(fileName,
             "\r\n800000000003600000070090200050007000000045700000100030001000068008500010090000400\r\n"))
         fileNames.add(fileName)
-        assertEquals(resultingGrid, FileManager.readFile(fileName))
+        assertEquals(resultingGrid, FileManager.readFile(File(fileName)))
     }
     @Test
     fun testReadFile_sdm() {
@@ -96,7 +97,7 @@ class FileManagerUnitTest {
         assertTrue(FileManager.writeFile(fileName,
             "\r\n800000000003600000070090200050007000000045700000100030001000068008500010090000400\r\n"))
         fileNames.add(fileName)
-        assertEquals(resultingGrid, FileManager.readFile(fileName))
+        assertEquals(resultingGrid, FileManager.readFile(File(fileName)))
     }
 
     @Test
@@ -115,7 +116,7 @@ class FileManagerUnitTest {
                      " . . 8 | 5 . . | . 1 .\r\n" +
                      " . 9 . | . . . | 4 . ."))
         fileNames.add(fileName)
-        assertEquals(resultingGrid, FileManager.readFile(fileName))
+        assertEquals(resultingGrid, FileManager.readFile(File(fileName)))
     }
 
     @Test
@@ -136,7 +137,7 @@ class FileManagerUnitTest {
                     " | . 9 . | . . . | 4 . . |\n" +
                     " *-----------------------*\n"))
         fileNames.add(fileName)
-        assertEquals(resultingGrid, FileManager.readFile(fileName))
+        assertEquals(resultingGrid, FileManager.readFile(File(fileName)))
     }
 
     @Test
@@ -144,12 +145,12 @@ class FileManagerUnitTest {
         val fileName = "testWrite.spf"
         fileNames.add(fileName)
         assertTrue(FileManager.writeFileSPF(fileName, resultingGrid))
-        assertEquals(resultingGrid, FileManager.readFile(fileName))
+        assertEquals(resultingGrid, FileManager.readFile(File(fileName)))
     }
 
     @Test
     fun testReadFile_unexistingFile() {
-        assertNull(FileManager.readFile("unexistingTestFile.txt"))
+        assertNull(FileManager.readFile(File("unexistingTestFile.txt")))
     }
 
     @Test
@@ -167,7 +168,7 @@ class FileManagerUnitTest {
                     "008500010\r\n" +
                     "090000400"))
         fileNames.add(fileName)
-        assertNull(FileManager.readFile(fileName))
+        assertNull(FileManager.readFile(File(fileName)))
     }
 
     @Test
