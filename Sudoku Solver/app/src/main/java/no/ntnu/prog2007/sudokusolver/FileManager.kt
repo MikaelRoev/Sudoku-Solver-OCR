@@ -16,7 +16,7 @@ import java.io.InputStream
  */
 class FileManager {
     companion object {
-        private val supportedFileExtensions = arrayOf(
+        val supportedFileExtensions = arrayOf(
             "msk", "sol", "sdk", "sdm", "txt", "spf", "ss"
         )
 

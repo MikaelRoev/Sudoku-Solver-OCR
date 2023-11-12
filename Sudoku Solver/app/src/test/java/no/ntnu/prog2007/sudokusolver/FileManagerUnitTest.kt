@@ -172,7 +172,19 @@ class FileManagerUnitTest {
     }
 
     @Test
-    fun deleteFile_unexistingFile() {
+    fun testDeleteFile_unexistingFile() {
         assertTrue(!FileManager.deleteFile("unexistingTestFile.txt"))
+    }
+
+    @Test
+    fun testIsSupportedFileType_supportedTypes() {
+        FileManager.supportedFileExtensions.forEach {
+            assertTrue(FileManager.isSupportedFileType(it))
+        }
+    }
+
+    @Test
+    fun testIsSupportedFileType_unsupportedType() {
+        assertTrue(!FileManager.isSupportedFileType("bob"))
     }
 }
