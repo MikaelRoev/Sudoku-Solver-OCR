@@ -2,6 +2,6 @@
     <string name="app_name">Sudoku Solver</string>
     <string name="title_home">Home</string>
     <string name="title_insert">Insert sudoku</string>
-    <string name="title_gallery">Gallery</string>
+    <string name="title_filechooser">Gallery</string>
     <string name="title_info">Information</string>
 </resources>
