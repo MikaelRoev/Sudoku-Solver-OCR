@@ -45,6 +45,12 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
         return fragmentBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+    }
+
     private fun updateCells(cells: List<Cell>?) = cells?.let {
         binding.sudokuBoard.updateCells(cells)
     }
