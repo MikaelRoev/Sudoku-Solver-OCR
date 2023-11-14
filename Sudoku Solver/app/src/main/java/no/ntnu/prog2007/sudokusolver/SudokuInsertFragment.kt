@@ -5,25 +5,43 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import no.ntnu.prog2007.sudokusolver.databinding.FragmentSudokuInsertBinding
+import no.ntnu.prog2007.sudokusolver.view.SudokuBoard
+import no.ntnu.prog2007.sudokusolver.viewmodel.SudokuViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
 
 /**
  * A simple [Fragment] subclass.
  * Use the [SudokuInsertFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SudokuInsertFragment : Fragment() {
+class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
 
+    private lateinit var binding: FragmentSudokuInsertBinding
+    private lateinit var viewModel: SudokuViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sudoku_insert, container, false)
+        val fragmentBinding = FragmentSudokuInsertBinding.inflate(inflater, container, false)
+        binding = fragmentBinding
+        binding.sudokuBoard.registerListener(this)
+        viewModel = ViewModelProvider(this)[SudokuViewModel::class.java]
+        viewModel.sudokuGame.selectedLiveData.observe(viewLifecycleOwner) { updateSelectedCellUI(it) }
+        return fragmentBinding.root
     }
+
+    private fun updateSelectedCellUI(cell: Pair<Int, Int>?) = cell?.let {
+        binding.sudokuBoard.updateSelectedCell(cell.first, cell.second)
+    }
+
+    override fun onCellTouched(row: Int, column: Int) {
+        viewModel.sudokuGame.updateSelectedCell(row, column)
+    }
+
+
+
 
 }
