@@ -1,8 +1,9 @@
-package no.ntnu.prog2007.sudokusolver
+package no.ntnu.prog2007.sudokusolver.ui.info
 
 import android.os.Bundle
+import no.ntnu.prog2007.sudokusolver.R
 
-class InfoActivity {
+class InfoFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
