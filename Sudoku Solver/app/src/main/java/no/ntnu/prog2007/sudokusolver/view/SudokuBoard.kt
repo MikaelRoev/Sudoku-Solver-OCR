@@ -125,7 +125,7 @@ class SudokuBoard(context: Context, attributeSet: AttributeSet): View(context, a
                 val textHeight = textLimits.height()
                 canvas.drawText(valueString, (column * cellSizePx) + cellSizePx / 2 - textWidth / 2,
                     (row * cellSizePx) + cellSizePx / 2 + textHeight / 2, whichPaint)
-            } else if (!it.isInputCell) {
+            } else if (solvedBoard == true && !it.isInputCell) {
                 val row = it.row
                 val column = it.column
                 val valueString = "?"
