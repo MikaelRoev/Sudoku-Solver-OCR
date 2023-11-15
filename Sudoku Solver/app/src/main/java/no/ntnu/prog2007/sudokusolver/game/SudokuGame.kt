@@ -32,4 +32,17 @@ class SudokuGame {
             selectedLiveData.postValue(Pair(row, column))
         }
     }
+
+
+    fun getCells(): List<Cell> {
+        return board.cells
+    }
+
+    fun setCells(cells: List<Cell>) {
+        board.cells = cells
+    }
+
+    fun getBoard(): Board {
+        return board
+    }
 }

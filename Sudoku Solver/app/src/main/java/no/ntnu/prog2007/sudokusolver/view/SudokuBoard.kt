@@ -18,8 +18,8 @@ class SudokuBoard(context: Context, attributeSet: AttributeSet): View(context, a
     private var size = 9
 
     private var cellSizePx = 0F
-    private var selectedCellRow = 0
-    private var selectedCellCol = 0
+    private var selectedCellRow = -1
+    private var selectedCellCol = -1
 
     private var listener: OnTouchListener? = null
 
@@ -111,11 +111,24 @@ class SudokuBoard(context: Context, attributeSet: AttributeSet): View(context, a
     }
 
     private fun writeCellText(canvas: Canvas) {
+        val solvedBoard = cells?.any { it.isInputCell }
         cells?.forEach {
             if (it.value != 0) {
                 val row = it.row
                 val column = it.column
                 val valueString = it.value.toString()
+
+                val whichPaint = if (it.isInputCell) inputCellTextPaint else textPaint
+                val textLimits = Rect()
+                whichPaint.getTextBounds(valueString, 0, valueString.length, textLimits)
+                val textWidth = whichPaint.measureText(valueString)
+                val textHeight = textLimits.height()
+                canvas.drawText(valueString, (column * cellSizePx) + cellSizePx / 2 - textWidth / 2,
+                    (row * cellSizePx) + cellSizePx / 2 + textHeight / 2, whichPaint)
+            } else if (!it.isInputCell) {
+                val row = it.row
+                val column = it.column
+                val valueString = "?"
 
                 val whichPaint = if (it.isInputCell) inputCellTextPaint else textPaint
                 val textLimits = Rect()
