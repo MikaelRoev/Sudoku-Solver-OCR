@@ -55,14 +55,12 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
         buttons.forEachIndexed { index, button ->
             button.setOnClickListener { viewModel.sudokuGame.handleInput(index) }
         }
+        binding.solveButton.setOnClickListener { solveSudokuAndChangeFragment() }
+        binding.clearButton.setOnClickListener { clearSudokuBoard()}
 
         return fragmentBinding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.solveButton.setOnClickListener { solveSudokuAndChangeFragment() }
-    }
 
     private fun updateCells(cells: List<Cell>?) = cells?.let {
         binding.sudokuBoard.updateCells(cells)
@@ -147,7 +145,7 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
             binding.threeButton, binding.fourButton, binding.fiveButton,
             binding.sixButton, binding.sevenButton, binding.eightButton, binding.nineButton)
         buttons.forEachIndexed { index, button ->
-            if (index != selectedCell.value) {
+            if (index == selectedCell.value) {
                 button.isEnabled = true
             } else {
                 button.isEnabled = true
@@ -165,5 +163,9 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
                 }
             }
         }
+    }
+
+    private fun clearSudokuBoard() {
+        binding.sudokuBoard.clearSudokuBoard()
     }
 }

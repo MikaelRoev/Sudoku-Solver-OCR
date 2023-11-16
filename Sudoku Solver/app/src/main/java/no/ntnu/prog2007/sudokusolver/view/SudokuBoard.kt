@@ -130,7 +130,7 @@ class SudokuBoard(context: Context, attributeSet: AttributeSet): View(context, a
                 val textHeight = textLimits.height()
                 canvas.drawText(valueString, (column * cellSizePx) + cellSizePx / 2 - textWidth / 2,
                     (row * cellSizePx) + cellSizePx / 2 + textHeight / 2, textPaint)
-            } else if (solvedBoard == true && !it.isInputCell) {
+            } else if (solvedBoard == true && !it.isInputCell && !it.isRevealed) {
                 val row = it.row
                 val column = it.column
                 val valueString = "?"
@@ -152,6 +152,17 @@ class SudokuBoard(context: Context, attributeSet: AttributeSet): View(context, a
                 val textHeight = textLimits.height()
                 canvas.drawText(valueString, (column * cellSizePx) + cellSizePx / 2 - textWidth / 2,
                     (row * cellSizePx) + cellSizePx / 2 + textHeight / 2, inputCellTextPaint)
+            } else if (solvedBoard == true && it.isRevealed) {
+                val row = it.row
+                val column = it.column
+                val valueString = it.value.toString()
+
+                val textLimits = Rect()
+                textPaint.getTextBounds(valueString, 0, valueString.length, textLimits)
+                val textWidth = textPaint.measureText(valueString)
+                val textHeight = textLimits.height()
+                canvas.drawText(valueString, (column * cellSizePx) + cellSizePx / 2 - textWidth / 2,
+                    (row * cellSizePx) + cellSizePx / 2 + textHeight / 2, textPaint)
             }
         }
     }
@@ -187,6 +198,33 @@ class SudokuBoard(context: Context, attributeSet: AttributeSet): View(context, a
 
     fun updateCells(cells: List<Cell>) {
         this.cells = cells
+        invalidate()
+    }
+
+    fun revealSolvedCell(row: Int, column: Int) {
+        cells?.forEach {
+            if (it.row == row && it.column == column) {
+                it.isRevealed = true
+            }
+        }
+        invalidate()
+    }
+
+    fun revealAllSolvedCells() {
+        cells?.forEach {
+            if (!it.isInputCell) {
+                it.isRevealed = true
+            }
+        }
+        invalidate()
+    }
+
+    fun clearSudokuBoard() {
+        cells?.forEach {
+            it.value = 0
+            it.isRevealed = false
+            it.isInputCell = false
+        }
         invalidate()
     }
 }

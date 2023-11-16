@@ -7,12 +7,14 @@ class Cell(
     val row: Int,
     val column: Int,
     var value: Int,
-    var isInputCell: Boolean = false
+    var isInputCell: Boolean = false,
+    var isRevealed: Boolean = false
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
+        parcel.readByte() != 0.toByte(),
         parcel.readByte() != 0.toByte()
     ) {
     }
@@ -22,6 +24,7 @@ class Cell(
         parcel.writeInt(column)
         parcel.writeInt(value)
         parcel.writeByte(if (isInputCell) 1 else 0)
+        parcel.writeByte(if (isRevealed) 1 else 0)
     }
 
     override fun describeContents(): Int {

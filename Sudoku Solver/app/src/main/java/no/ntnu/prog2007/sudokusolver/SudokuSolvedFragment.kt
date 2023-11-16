@@ -33,8 +33,11 @@ class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener {
         binding.sudokuBoard.registerListener(this)
         viewModel = ViewModelProvider(this)[SudokuViewModel::class.java]
         viewModel.sudokuGame.selectedLiveData.observe(viewLifecycleOwner) { updateSelectedCellUI(it) }
+        viewModel.sudokuGame.selectedLiveData.observe(viewLifecycleOwner) { revealSolvedCell(it) }
         viewModel.sudokuGame.cellsLiveData.observe(viewLifecycleOwner) { updateCells(solvedCells) }
         viewModel.sudokuGame.setCells(solvedCells?: listOf())
+
+        binding.revealAllButton.setOnClickListener { revealAllSolvedCells() }
 
         return fragmentBinding.root
     }
@@ -50,6 +53,15 @@ class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener {
 
     override fun onCellTouched(row: Int, column: Int) {
         viewModel.sudokuGame.updateSelectedCell(row, column)
+    }
+
+    private fun revealSolvedCell(cell: Pair<Int, Int>?) = cell?.let {
+        binding.sudokuBoard.revealSolvedCell(cell.first, cell.second)
+
+    }
+
+    private fun revealAllSolvedCells() {
+        binding.sudokuBoard.revealAllSolvedCells()
     }
 
 }

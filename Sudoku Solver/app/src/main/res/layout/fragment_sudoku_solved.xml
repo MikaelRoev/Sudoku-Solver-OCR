@@ -13,4 +13,12 @@
         android:layout_margin="8dp"
         android:layout_alignParentTop="true" />
 
+    <Button
+        android:id="@+id/revealAllButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/sudokuBoard"
+        android:text="Reveal all numbers" />
+
 </RelativeLayout>
