@@ -41,8 +41,4 @@ class SudokuGame {
     fun setCells(cells: List<Cell>) {
         board.cells = cells
     }
-
-    fun getBoard(): Board {
-        return board
-    }
 }

@@ -78,6 +78,7 @@ class SudokuBoard(context: Context, attributeSet: AttributeSet): View(context, a
     }
 
     private fun fillCells(canvas: Canvas) {
+        val solvedBoard = cells?.any { it.isInputCell }
         cells?.forEach {
             val r = it.row
             val c = it.column
@@ -85,11 +86,16 @@ class SudokuBoard(context: Context, attributeSet: AttributeSet): View(context, a
                 fillCell(canvas, r, c, inputCellPaint)
             } else if (r == selectedCellRow && c == selectedCellCol) {
                 fillCell(canvas, r, c, selectedCellPaint)
-            } else if (r == selectedCellRow || c == selectedCellCol) {
-                fillCell(canvas, r, c, conflictingCellPaint)
-            } else if (r / sqrtSize == selectedCellRow / sqrtSize && c / sqrtSize == selectedCellCol / sqrtSize) {
-                fillCell(canvas, r, c, conflictingCellPaint)
+            } else if (solvedBoard != true) {
+                if (r == selectedCellRow || c == selectedCellCol) {
+                    fillCell(canvas, r, c, conflictingCellPaint)
+                } else if (r / sqrtSize == selectedCellRow / sqrtSize && c / sqrtSize == selectedCellCol / sqrtSize) {
+                    fillCell(canvas, r, c, conflictingCellPaint)
             }
+            }
+
+
+
         }
     }
 
@@ -113,30 +119,39 @@ class SudokuBoard(context: Context, attributeSet: AttributeSet): View(context, a
     private fun writeCellText(canvas: Canvas) {
         val solvedBoard = cells?.any { it.isInputCell }
         cells?.forEach {
-            if (it.value != 0) {
+            if (it.value != 0 && solvedBoard != true) {
                 val row = it.row
                 val column = it.column
                 val valueString = it.value.toString()
 
-                val whichPaint = if (it.isInputCell) inputCellTextPaint else textPaint
                 val textLimits = Rect()
-                whichPaint.getTextBounds(valueString, 0, valueString.length, textLimits)
-                val textWidth = whichPaint.measureText(valueString)
+                textPaint.getTextBounds(valueString, 0, valueString.length, textLimits)
+                val textWidth = textPaint.measureText(valueString)
                 val textHeight = textLimits.height()
                 canvas.drawText(valueString, (column * cellSizePx) + cellSizePx / 2 - textWidth / 2,
-                    (row * cellSizePx) + cellSizePx / 2 + textHeight / 2, whichPaint)
+                    (row * cellSizePx) + cellSizePx / 2 + textHeight / 2, textPaint)
             } else if (solvedBoard == true && !it.isInputCell) {
                 val row = it.row
                 val column = it.column
                 val valueString = "?"
 
-                val whichPaint = if (it.isInputCell) inputCellTextPaint else textPaint
                 val textLimits = Rect()
-                whichPaint.getTextBounds(valueString, 0, valueString.length, textLimits)
-                val textWidth = whichPaint.measureText(valueString)
+                textPaint.getTextBounds(valueString, 0, valueString.length, textLimits)
+                val textWidth = textPaint.measureText(valueString)
                 val textHeight = textLimits.height()
                 canvas.drawText(valueString, (column * cellSizePx) + cellSizePx / 2 - textWidth / 2,
-                    (row * cellSizePx) + cellSizePx / 2 + textHeight / 2, whichPaint)
+                    (row * cellSizePx) + cellSizePx / 2 + textHeight / 2, textPaint)
+            } else if (solvedBoard == true && it.isInputCell) {
+                val row = it.row
+                val column = it.column
+                val valueString = it.value.toString()
+
+                val textLimits = Rect()
+                inputCellTextPaint.getTextBounds(valueString, 0, valueString.length, textLimits)
+                val textWidth = inputCellTextPaint.measureText(valueString)
+                val textHeight = textLimits.height()
+                canvas.drawText(valueString, (column * cellSizePx) + cellSizePx / 2 - textWidth / 2,
+                    (row * cellSizePx) + cellSizePx / 2 + textHeight / 2, inputCellTextPaint)
             }
         }
     }

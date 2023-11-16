@@ -23,12 +23,9 @@ class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener {
         savedInstanceState: Bundle?
     ): View? {
         val solvedCells = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelableArrayList("Cells", Cell::class.java)
+            arguments?.getParcelableArrayList("SolvedCells", Cell::class.java)
         } else {
-            arguments?.getParcelableArrayList("Cells")
-        }
-        solvedCells?.forEach {
-            Log.d("SudokuSolvedFragment", "Cell: ${it.row}, ${it.column}, ${it.isInputCell}")
+            arguments?.getParcelableArrayList("SolvedCells")
         }
 
         val fragmentBinding = FragmentSudokuSolvedBinding.inflate(inflater, container, false)
@@ -44,9 +41,6 @@ class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener {
 
     private fun updateCells(cells: List<Cell>?) = cells?.let {
         binding.sudokuBoard.updateCells(cells)
-        cells.forEach {
-            Log.d("SudokuSolvedFragment", "Cell: ${it.row}, ${it.column}, ${it.isInputCell}")
-        }
     }
 
     private fun updateSelectedCellUI(cell: Pair<Int, Int>?) = cell?.let {
