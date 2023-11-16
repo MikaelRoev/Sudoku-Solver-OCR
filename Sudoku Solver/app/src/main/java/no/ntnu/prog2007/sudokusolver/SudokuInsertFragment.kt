@@ -1,7 +1,6 @@
 package no.ntnu.prog2007.sudokusolver
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,9 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import no.ntnu.prog2007.sudokusolver.databinding.ActivitySudokuBoardBinding
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentSudokuInsertBinding
 import no.ntnu.prog2007.sudokusolver.game.Cell
 import no.ntnu.prog2007.sudokusolver.view.SudokuBoard
@@ -49,6 +46,7 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
             viewModel.sudokuGame.cellsLiveData.observe(viewLifecycleOwner) { updateCells(it) }
         }
         viewModel.sudokuGame.selectedLiveData.observe(viewLifecycleOwner) { updateSelectedCellUI(it) }
+        viewModel.sudokuGame.selectedLiveData.observe(viewLifecycleOwner) { disableButtonsWrongBySudoku(it) }
 
         val buttons = listOf(binding.noneButton, binding.oneButton, binding.twoButton,
             binding.threeButton, binding.fourButton, binding.fiveButton,
@@ -139,5 +137,33 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
         return cells
     }
 
-
+    private fun disableButtonsWrongBySudoku(cell: Pair<Int, Int>?) = cell.let {
+        if (cell?.first == -1 || cell?.second == -1) return
+        val cells = viewModel.sudokuGame.getCells()
+        val selectedCell = cells[cell!!.first*9+cell.second]
+        val selectedCellRow = selectedCell.row
+        val selectedCellColumn = selectedCell.column
+        val buttons = listOf(binding.noneButton, binding.oneButton, binding.twoButton,
+            binding.threeButton, binding.fourButton, binding.fiveButton,
+            binding.sixButton, binding.sevenButton, binding.eightButton, binding.nineButton)
+        buttons.forEachIndexed { index, button ->
+            if (index != selectedCell.value) {
+                button.isEnabled = true
+            } else {
+                button.isEnabled = true
+                for (i in 0..8) {
+                    if (cells[selectedCellRow*9+i].value == index || cells[i*9+selectedCellColumn].value == index) {
+                        if (button != binding.noneButton) button.isEnabled = false
+                    }
+                }
+                for (i in selectedCellRow/3*3..selectedCellRow/3*3+2) {
+                    for (j in selectedCellColumn/3*3..selectedCellColumn/3*3+2) {
+                        if (cells[i*9+j].value == index) {
+                            if (button != binding.noneButton) button.isEnabled = false
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
