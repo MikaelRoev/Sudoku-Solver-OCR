@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_insert" />
 
     <fragment
-        android:id="@+id/navigation_fileChooser"
+        android:id="@+id/navigation_filechooser"
         android:name="no.ntnu.prog2007.sudokusolver.ui.filechooser.FileChooserFragment"
         android:label="@string/title_filechooser"
         tools:layout="@layout/fragment_filechooser" />
