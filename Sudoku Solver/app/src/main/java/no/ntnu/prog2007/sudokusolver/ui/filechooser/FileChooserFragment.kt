@@ -10,12 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentFilechooserBinding
 
 class FileChooserFragment : Fragment() {
-
-
     private var _binding: FragmentFilechooserBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -29,7 +26,7 @@ class FileChooserFragment : Fragment() {
         _binding = FragmentFilechooserBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.fileChooserText
+        val textView: TextView = binding.textFileChooser
         fileChooserViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
