@@ -1,13 +1,12 @@
-package no.ntnu.prog2007.sudokusolver.ui.home
+package no.ntnu.prog2007.sudokusolver.ui.insert
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
-
+class InsertViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is insert Fragment"
     }
     val text: LiveData<String> = _text
 
