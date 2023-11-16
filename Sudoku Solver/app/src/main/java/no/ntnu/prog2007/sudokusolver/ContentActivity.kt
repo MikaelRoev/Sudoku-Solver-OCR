@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import no.ntnu.prog2007.sudokusolver.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class ContentActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {

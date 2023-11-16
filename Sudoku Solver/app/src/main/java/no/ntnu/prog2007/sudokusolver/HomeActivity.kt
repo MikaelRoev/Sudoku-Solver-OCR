@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getActivityContent() {
-        intent = Intent(this, MainActivity::class.java)
+        intent = Intent(this, ContentActivity::class.java)
         startActivity(intent)
     }
 
