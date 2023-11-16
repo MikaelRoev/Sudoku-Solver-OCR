@@ -1,35 +1,32 @@
 package no.ntnu.prog2007.sudokusolver
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import no.ntnu.prog2007.sudokusolver.databinding.ActivityMainBinding
-import no.ntnu.prog2007.sudokusolver.ui.info.InfoFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val navView: BottomNavigationView = binding.navView
 
-        binding.insertButton.setOnClickListener { getActivityContent() }
-        binding.galleryButton.setOnClickListener { getActivityContent() }
-        binding.infoButton.setOnClickListener { getActivityContent() }
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
-    }
-
-    private fun getActivityContent() {
-        intent = Intent(this, ContentActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun getFragmentInfo() {
-        intent = Intent(this, InfoFragment::class.java)
-
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.navigation_home, R.id.navigation_insert,
+                R.id.navigation_filechooser, R.id.navigation_info)
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 }

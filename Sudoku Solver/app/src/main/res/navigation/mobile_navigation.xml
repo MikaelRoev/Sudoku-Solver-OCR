@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="no.ntnu.prog2007.sudokusolver."
         android:label="@string/title_home"
-        tools:layout="@layout/activity_main" />
+        tools:layout="@layout/activity_home" />
 
     <fragment
         android:id="@+id/navigation_insert"

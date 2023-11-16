@@ -28,7 +28,7 @@ class InsertFragment : Fragment() {
         _binding = FragmentInsertBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.insertText
+        val textView: TextView = binding.textInsert
         insertViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
