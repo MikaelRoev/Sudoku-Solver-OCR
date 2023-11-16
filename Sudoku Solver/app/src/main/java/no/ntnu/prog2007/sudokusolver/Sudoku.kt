@@ -81,6 +81,22 @@ class Sudoku() {
     }
 
     /**
+     * Check if the grid has at least the minimum number of clues which is 17.
+     * @return true if it has at lest 17 clues or false if it has less then 17
+     */
+    private fun hasAtLeastMinimumClues(): Boolean {
+        var numberOfClues = 0
+        for (row in grid) {
+            for (number in row) {
+                if (number == 0) continue
+                numberOfClues++
+                if (numberOfClues >= 17) return true
+            }
+        }
+        return false
+    }
+
+    /**
      * Replicates a grid.
      * @return the replicated grid.
      */
@@ -224,7 +240,8 @@ class Sudoku() {
         return values
     }
 
-    private fun gridToSting(sb: StringBuilder, grid: List<List<Int>>) {
+    private fun gridToSting(grid: List<List<Int>>): String {
+        val sb = StringBuilder()
         for (row in 0 until n) {
             if (row % 3 == 0 && row != 0) sb.append("---------------------\n")
             for (col in 0 until n) {
@@ -233,17 +250,10 @@ class Sudoku() {
             }
             sb.append('\n')
         }
-    }
-
-    fun solutionToString(): String {
-        val sb = StringBuilder()
-        gridToSting(sb, solution)
         return sb.toString()
     }
 
-    override fun toString(): String {
-        val sb = StringBuilder()
-        gridToSting(sb, grid)
-        return sb.toString()
-    }
+    fun solutionToString() = gridToSting(solution)
+
+    override fun toString() = gridToSting(grid)
 }
