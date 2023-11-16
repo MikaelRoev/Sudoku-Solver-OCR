@@ -12,7 +12,7 @@ class InfoViewModel : ViewModel() {
                 "1. Click 'insert sudoku'\n" +
                 "2. Click on a selected cell, and the number of choice\n\n" +
                 "After inserting all the numbers you know, you can solve it, " +
-                "and reveal the numbers of your chiose!\n" +
+                "and reveal the numbers of your chioce!\n" +
                 "1. Click 'solve'\n" +
                 "2. You will be sent to the solved sudoku\n" +
                 "3. Click on a selected cell to reveal the number underneath\n\n" +
