@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.Sudoku-Solver-OCR.ui.home.HomeFragment"
+        android:name="no.ntnu.prog2007.sudokusolver."
         android:label="@string/title_home"
         tools:layout="@layout/activity_main" />
 
     <fragment
         android:id="@+id/navigation_insert"
-        android:name="com.example.Sudoku-Solver-OCR.ui.dashboard.DashboardFragment"
+        android:name="no.ntnu.prog2007.sudokusolver."
         android:label="@string/title_insert"
         tools:layout="@layout/fragment_insert" />
 
     <fragment
-        android:id="@+id/navigation_filechooser"
-        android:name="com.example.Sudoku-Solver-OCR.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_fileChooser"
+        android:name="no.ntnu.prog2007.sudokusolver."
         android:label="@string/title_filechooser"
         tools:layout="@layout/fragment_filechooser" />
 
     <fragment
         android:id="@+id/navigation_info"
-        android:name="com.example.Sudoku-Solver-OCR"
+        android:name="no.ntnu.prog2007.sudokusolver."
         android:label="@string/title_info"
         tools:layout="@layout/fragment_info"
 

@@ -37,6 +37,4 @@ class InfoFragment : FragmentActivity() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }
