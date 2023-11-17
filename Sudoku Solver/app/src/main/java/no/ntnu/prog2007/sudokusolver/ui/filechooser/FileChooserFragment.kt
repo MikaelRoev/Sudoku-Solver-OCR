@@ -7,11 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import no.ntnu.prog2007.sudokusolver.FileManager
 import no.ntnu.prog2007.sudokusolver.R
@@ -24,10 +22,8 @@ class FileChooserFragment : Fragment() {
         const val CHOSEN_GRID_KEY = "no.ntnu.prog2007.sudokusolver.CHOSEN_GRID_KEY"
     }
 
-    private var _binding: FragmentFilechooserBinding? = null
+    private lateinit var binding: FragmentFilechooserBinding
 
-    // This property is only valid between onCreateView and onDestroyView.
-    private val binding get() = _binding!!
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let { handleSelectedFile(it) }
@@ -39,24 +35,11 @@ class FileChooserFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val fileChooserViewModel =
-            ViewModelProvider(this).get(FileChooserViewModel::class.java)
-
-        _binding = FragmentFilechooserBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        binding = FragmentFilechooserBinding.inflate(inflater, container, false)
 
         openFileChooser()
 
-        val textView: TextView = binding.textFileChooser
-        fileChooserViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return binding.root
     }
 
     /**
