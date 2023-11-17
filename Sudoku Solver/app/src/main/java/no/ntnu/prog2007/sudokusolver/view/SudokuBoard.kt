@@ -67,7 +67,11 @@ class SudokuBoard(context: Context, attributeSet: AttributeSet): View(context, a
      */
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        val sizePx = min(widthMeasureSpec, heightMeasureSpec)
+        val sizePx = if (heightMeasureSpec/widthMeasureSpec <= 16/9) {
+            min(widthMeasureSpec, heightMeasureSpec/2)
+        } else {
+            min(widthMeasureSpec, heightMeasureSpec)
+        }
         setMeasuredDimension(sizePx, sizePx)
     }
 

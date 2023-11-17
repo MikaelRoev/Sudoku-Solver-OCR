@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.Sudoku
 import no.ntnu.prog2007.sudokusolver.ui.solved.SudokuSolvedFragment
@@ -132,7 +131,7 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
             }
 
             // Changes the fragment to the SudokuSolvedFragment
-            findNavController().navigate(R.id.sudokuSolvedFragment, sudokuSolvedFragment.arguments)
+            parentFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_activity_main, sudokuSolvedFragment).commit()
 
         // If the Sudoku is not solvable, an alert is shown.
         } else {
