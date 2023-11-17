@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/navigation_home"
-
+        android:icon="@drawable/ic_home"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_insert"
-
+        android:icon="@drawable/ic_insert_sudoku"
         android:title="@string/title_insert" />
 
     <item
         android:id="@+id/navigation_filechooser"
-
+        android:icon="@drawable/ic_file_selector"
         android:title="@string/title_filechooser" />
 
     <item
         android:id="@+id/navigation_info"
-
+        android:icon="@drawable/ic_info"
         android:title="@string/title_info" />
 
 </menu>
