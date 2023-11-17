@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import no.ntnu.prog2007.sudokusolver.FileManager
 import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentFilechooserBinding
-import no.ntnu.prog2007.sudokusolver.ui.insert.InsertFragment
+import no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment
 
 class FileChooserFragment : Fragment() {
     private var _binding: FragmentFilechooserBinding? = null
@@ -92,7 +92,7 @@ class FileChooserFragment : Fragment() {
      * Changes the fragment to the insert fragment.
      */
     private fun goToInsertFragment() {
-        val insertFragment = InsertFragment().apply {
+        val insertFragment = SudokuInsertFragment().apply {
             arguments = Bundle().apply {
                 //TODO transfer grid
                 //putParcelableArrayList("Chosengrid", chosenSudokuGrid)
