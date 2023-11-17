@@ -3,6 +3,9 @@
     <style name="Base.Theme.SudokuSolver" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:background">@color/white_background</item>
+        <item name="colorButtonNormal">@color/blue1</item>
+        <item name="colorSecondaryContainer">@color/blue1</item>
     </style>
 
     <style name="Theme.SudokuSolver" parent="Base.Theme.SudokuSolver" />

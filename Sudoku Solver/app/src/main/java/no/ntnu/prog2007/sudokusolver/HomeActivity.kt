@@ -16,11 +16,9 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.insertButton.setOnClickListener { getActivityContent() }
         binding.galleryButton.setOnClickListener { getActivityContent() }
         binding.infoButton.setOnClickListener { getActivityContent() }
-
     }
 
     private fun getActivityContent() {
