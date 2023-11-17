@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">Sudoku Solver</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="clear_board_button_text">Clear board</string>
+    <string name="solve_button_text">Solve</string>
+    <string name="delete_button_text">Delete</string>
+    <string name="_1_button_text">1</string>
+    <string name="_2_button_text">2</string>
+    <string name="_3_button_text">3</string>
+    <string name="_4_button_text">4</string>
+    <string name="_5_button_text">5</string>
+    <string name="_6_button_text">6</string>
+    <string name="_7_button_text">7</string>
+    <string name="_8_button_text">8</string>
+    <string name="_9_button_text">9</string>
+    <string name="reveal_all_numbers_button_text">Reveal all numbers</string>
 </resources>

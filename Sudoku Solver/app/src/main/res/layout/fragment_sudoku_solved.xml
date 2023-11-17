@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/sudokuBoard"
-        android:text="Reveal all numbers" />
+        android:text="@string/reveal_all_numbers_button_text" />
 
 </RelativeLayout>
