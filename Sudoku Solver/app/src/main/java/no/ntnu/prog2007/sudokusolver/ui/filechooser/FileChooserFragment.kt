@@ -13,7 +13,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import no.ntnu.prog2007.sudokusolver.FileManager
+import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentFilechooserBinding
+import no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment
 
 class FileChooserFragment : Fragment() {
     private var _binding: FragmentFilechooserBinding? = null
@@ -59,25 +61,45 @@ class FileChooserFragment : Fragment() {
     }
 
     /**
-     * Defines what happens when you get a result from the file chooser activity page.
-     * @param result the result of the file chooser activity page.
+     * Defines what happens when you get a uri from the file chooser activity page.
+     * @param uri the uri of the file chooser activity page.
      */
     private fun handleSelectedFile(uri: Uri) {
         try {
-            val selectedFileType = getFileType(uri) ?: return
-            if (!FileManager.isSupportedFileType(selectedFileType)) {
-                showToast("Unsupported file type")
+            val selectedFileType = getFileType(uri)
+            if (selectedFileType == null) {
+                Log.e("handleActivityResult", "Error when getting file type")
+                showToast("Error when getting file type")
+                openFileChooser()
                 return
             }
-
-            //TODO: What will happen when file is chosen
+            if (!FileManager.isSupportedFileType(selectedFileType)) {
+                showToast("Unsupported file type")
+                openFileChooser()
+                return
+            }
             chosenSudokuGrid = FileManager.readInputStream(
                 requireContext().contentResolver.openInputStream(uri)!!, selectedFileType)
 
+            goToInsertFragment()
         } catch (e: Exception) {
             Log.e("handleActivityResult", "Error processing file", e)
-
             showToast("Error processing file")
+        }
+    }
+
+    /**
+     * Changes the fragment to the insert fragment.
+     */
+    private fun goToInsertFragment() {
+        val insertFragment = SudokuInsertFragment().apply {
+            arguments = Bundle().apply {
+                //TODO transfer grid
+                //putParcelableArrayList("Chosengrid", chosenSudokuGrid)
+            }
+        }
+        parentFragmentManager.beginTransaction().apply {
+            replace(R.id.navigation_insert, insertFragment).commit()
         }
     }
 

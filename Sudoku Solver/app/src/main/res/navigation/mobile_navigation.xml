@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_insert"
-        android:name="no.ntnu.prog2007.sudokusolver.ui.insert.InsertFragment"
+        android:name="no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment"
         android:label="@string/title_insert"
-        tools:layout="@layout/fragment_insert" />
+        tools:layout="@layout/fragment_sudoku_insert" />
 
     <fragment
         android:id="@+id/navigation_filechooser"
