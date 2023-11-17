@@ -1,6 +1,7 @@
 package no.ntnu.prog2007.sudokusolver.ui.insert
 
 import android.app.AlertDialog
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,7 +15,9 @@ import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.Sudoku
 import no.ntnu.prog2007.sudokusolver.ui.solved.SudokuSolvedFragment
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentSudokuInsertBinding
+import no.ntnu.prog2007.sudokusolver.game.Board
 import no.ntnu.prog2007.sudokusolver.game.Cell
+import no.ntnu.prog2007.sudokusolver.ui.filechooser.FileChooserFragment.Companion.CHOSEN_GRID_KEY
 import no.ntnu.prog2007.sudokusolver.view.SudokuBoard
 import no.ntnu.prog2007.sudokusolver.view.SudokuViewModel
 
@@ -22,6 +25,9 @@ import no.ntnu.prog2007.sudokusolver.view.SudokuViewModel
  * A Fragment that contains the Sudoku board and buttons for inputting numbers.
  */
 class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
+    companion object {
+        const val SOLVED_CELLS_KEY = "no.ntnu.prog2007.sudokusolver.SOLVED_CELLS_KEY"
+    }
 
     private lateinit var binding: FragmentSudokuInsertBinding
     private lateinit var viewModel: SudokuViewModel
@@ -39,7 +45,16 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
         binding = fragmentBinding
         binding.sudokuBoard.registerListener(this)
         viewModel = ViewModelProvider(this)[SudokuViewModel::class.java]
-        //If the board has been solved, and the user returns to the insert fragment,
+
+
+        val chosenCells = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelableArrayList(CHOSEN_GRID_KEY, Cell::class.java)
+        } else {
+            arguments?.getParcelableArrayList(CHOSEN_GRID_KEY)
+        }
+        if (chosenCells != null) originalCells = chosenCells
+
+        // If the board has been solved, and the user returns to the insert fragment,
         // the originalCells is filled with the original input cells
         if (originalCells != null) {
             viewModel.sudokuGame.setCells(originalCells!!)
@@ -99,30 +114,30 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
     private fun solveSudokuAndChangeFragment() {
         val cells = viewModel.sudokuGame.getCells()
         // Converts the cells to a grid of integers so that it is compatible with the Sudoku class.
-        val grid = fromCellsToGrid(cells)
-        val sudoku = Sudoku(grid)
+        val grid = Board.fromCellsToGrid(cells)
+        val sudoku = Sudoku()
         // Solves the Sudoku
         sudoku.solve()
         if (sudoku.solved) {
             originalCells = cells
-            val solvedCells = fromGridToCells(sudoku.solution)
+            val solvedCells = Board.fromGridToCells(sudoku.solution)
             solvedCells.forEach {
-                if (cells[it.row*9+it.column].value != 0) it.isInputCell = true
+                if (cells[it.row * 9 + it.column].value != 0) it.isInputCell = true
             }
             // Creates a new SudokuSolvedFragment and passes the solved cells to it.
             val sudokuSolvedFragment = SudokuSolvedFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelableArrayList("SolvedCells", ArrayList(solvedCells))
+                    putParcelableArrayList(SOLVED_CELLS_KEY, ArrayList(solvedCells))
                 }
             }
 
             // Changes the fragment to the SudokuSolvedFragment
             findNavController().navigate(R.id.sudokuSolvedFragment, sudokuSolvedFragment.arguments)
 
-
         // If the Sudoku is not solvable, an alert is shown.
         } else {
-            val unsolvableAlert = AlertDialog.Builder(context).setMessage("This Sudoku is not solvable\n" +
+            val unsolvableAlert = AlertDialog.Builder(context).setMessage(
+                "This Sudoku is not solvable\n" +
                     "Please try again")
                 .setPositiveButton("OK") { _, _ -> }.create()
             unsolvableAlert.show()
@@ -132,37 +147,6 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
         }
     }
 
-    /**
-     * Converts a list of cells to a grid of integers.
-     * @param cells The cells to convert.
-     * @return The grid of integers.
-     */
-    private fun fromCellsToGrid(cells: List<Cell>): List<List<Int>> {
-        val grid = mutableListOf<MutableList<Int>>()
-        for (row in 0..8) {
-            val newRow = mutableListOf<Int>()
-            for (col in 0..8) {
-                newRow.add(cells[row*9+col].value)
-            }
-            grid.add(newRow)
-        }
-        return grid
-    }
-
-    /**
-     * Converts a grid of integers to a list of cells.
-     * @param grid The grid to convert.
-     * @return The list of cells.
-     */
-    private fun fromGridToCells(grid: List<List<Int>>): List<Cell> {
-        val cells = mutableListOf<Cell>()
-        for (row in 0..8) {
-            for (col in 0..8) {
-                cells.add(Cell(row, col, grid[row][col]))
-            }
-        }
-        return cells
-    }
 
     /**
      * Disables the buttons that are not possible to input in the selected cell.
@@ -179,24 +163,21 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
             binding.sixButton, binding.sevenButton, binding.eightButton, binding.nineButton)
         buttons.forEachIndexed { index, button ->
             // If the button is the same as the value of the selected cell, it is enabled.
-            if (index == selectedCell.value) {
-                button.isEnabled = true
-            } else {
-                button.isEnabled = true
+            button.isEnabled = true
+            if (index != selectedCell.value)
+            {
                 // If a number that matches the number on the button is already in the
                 // same row or column, the button is disabled.
                 for (i in 0..8) {
-                    if (cells[selectedCellRow*9+i].value == index || cells[i*9+selectedCellColumn].value == index) {
-                        if (button != binding.deleteButton) button.isEnabled = false
-                    }
+                    if (cells[selectedCellRow*9+i].value != index && cells[i*9+selectedCellColumn].value != index) continue
+                    if (button != binding.deleteButton) button.isEnabled = false
                 }
                 // If a number that matches the number on the button is already in the
                 // same 3x3 square, the button is disabled.
                 for (i in selectedCellRow/3*3..selectedCellRow/3*3+2) {
                     for (j in selectedCellColumn/3*3..selectedCellColumn/3*3+2) {
-                        if (cells[i*9+j].value == index) {
-                            if (button != binding.deleteButton) button.isEnabled = false
-                        }
+                        if (cells[i*9+j].value != index) continue
+                        if (button != binding.deleteButton) button.isEnabled = false
                     }
                 }
             }

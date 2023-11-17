@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentSudokuSolvedBinding
 import no.ntnu.prog2007.sudokusolver.game.Cell
+import no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment.Companion.SOLVED_CELLS_KEY
 import no.ntnu.prog2007.sudokusolver.view.SudokuBoard
 import no.ntnu.prog2007.sudokusolver.view.SudokuViewModel
 
@@ -28,9 +29,9 @@ class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener {
         savedInstanceState: Bundle?
     ): View {
         val solvedCells = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelableArrayList("SolvedCells", Cell::class.java)
+            arguments?.getParcelableArrayList(SOLVED_CELLS_KEY, Cell::class.java)
         } else {
-            arguments?.getParcelableArrayList("SolvedCells")
+            arguments?.getParcelableArrayList(SOLVED_CELLS_KEY)
         }
 
         val fragmentBinding = FragmentSudokuSolvedBinding.inflate(inflater, container, false)

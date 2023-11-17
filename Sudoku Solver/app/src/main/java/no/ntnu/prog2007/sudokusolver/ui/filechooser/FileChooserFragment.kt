@@ -12,12 +12,18 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import no.ntnu.prog2007.sudokusolver.FileManager
 import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentFilechooserBinding
+import no.ntnu.prog2007.sudokusolver.game.Board.Companion.fromGridToCells
 import no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment
 
 class FileChooserFragment : Fragment() {
+    companion object {
+        const val CHOSEN_GRID_KEY = "no.ntnu.prog2007.sudokusolver.CHOSEN_GRID_KEY"
+    }
+
     private var _binding: FragmentFilechooserBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
@@ -94,13 +100,12 @@ class FileChooserFragment : Fragment() {
     private fun goToInsertFragment() {
         val insertFragment = SudokuInsertFragment().apply {
             arguments = Bundle().apply {
-                //TODO transfer grid
-                //putParcelableArrayList("Chosengrid", chosenSudokuGrid)
+                val cells = fromGridToCells(chosenSudokuGrid!!)
+                putParcelableArrayList(CHOSEN_GRID_KEY, ArrayList(cells))
             }
         }
-        parentFragmentManager.beginTransaction().apply {
-            replace(R.id.navigation_insert, insertFragment).commit()
-        }
+
+        findNavController().navigate(R.id.navigation_insert, insertFragment.arguments)
     }
 
     /**
