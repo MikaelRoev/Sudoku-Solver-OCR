@@ -2,7 +2,11 @@ package no.ntnu.prog2007.sudokusolver.game
 
 import androidx.lifecycle.MutableLiveData
 
+/**
+ * Represents a Sudoku game.
+ */
 class SudokuGame {
+    // Fields
     var selectedLiveData = MutableLiveData<Pair<Int, Int>>()
     var cellsLiveData = MutableLiveData<List<Cell>>()
 
@@ -11,6 +15,9 @@ class SudokuGame {
 
     private val board: Board
 
+    /**
+     * Initializes a new instance of the SudokuGame class.
+     */
     init {
         val cells = List(9*9) { i -> Cell(i/9, i%9, 0) }
         board = Board(9, cells)
@@ -18,6 +25,10 @@ class SudokuGame {
         cellsLiveData.postValue(board.cells)
     }
 
+    /**
+     * Handles the input of a number to a cell.
+     * @param number The number to input.
+     */
     fun handleInput(number: Int) {
         if (selectedCellRow == -1 || selectedCellColumn == -1) return
         if (board.getCell(selectedCellRow, selectedCellColumn).isInputCell) return
@@ -25,6 +36,11 @@ class SudokuGame {
         cellsLiveData.postValue(board.cells)
     }
 
+    /**
+     * Updates the selected cell.
+     * @param row The row of the cell.
+     * @param column The column of the cell.
+     */
     fun updateSelectedCell(row: Int, column: Int) {
         if (!board.getCell(row, column).isInputCell) {
             selectedCellRow = row
@@ -34,10 +50,18 @@ class SudokuGame {
     }
 
 
+    /**
+     * Gets the cells of the game.
+     * @return The cells of the game.
+     */
     fun getCells(): List<Cell> {
         return board.cells
     }
 
+    /**
+     * Sets the cells of the game.
+     * @param cells The cells to set.
+     */
     fun setCells(cells: List<Cell>) {
         board.cells = cells
     }

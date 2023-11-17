@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.insert.SudokuInsertFragment">
+    tools:context=".SudokuInsertFragment">
 
     <no.ntnu.prog2007.sudokusolver.view.SudokuBoard
         android:id="@+id/sudokuBoard"
@@ -25,16 +25,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:layout_marginHorizontal="30dp"
-            android:text="@string/clear_board_button_text"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/clear_board_button_text" />
         <Button
             android:id="@+id/solveButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:layout_marginHorizontal="30dp"
-            android:text="@string/solve_button_text"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/solve_button_text" />
 
     </LinearLayout>
 
@@ -50,7 +48,7 @@
 
 
         <Button
-            android:id="@+id/noneButton"
+            android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="3"
@@ -64,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_column="0"
-            android:text="@string/button_1" />
+            android:text="@string/_1_button_text" />
 
         <Button
             android:id="@+id/twoButton"
@@ -72,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_column="1"
-            android:text="@string/button_2" />
+            android:text="@string/_2_button_text" />
 
         <Button
             android:id="@+id/threeButton"
@@ -80,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_column="2"
-            android:text="@string/button_3" />
+            android:text="@string/_3_button_text" />
 
         <Button
             android:id="@+id/fourButton"
@@ -88,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_row="1"
             android:layout_column="0"
-            android:text="@string/button_4" />
+            android:text="@string/_4_button_text" />
 
         <Button
             android:id="@+id/fiveButton"
@@ -96,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_row="1"
             android:layout_column="1"
-            android:text="@string/button_5" />
+            android:text="@string/_5_button_text" />
 
         <Button
             android:id="@+id/sixButton"
@@ -104,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_row="1"
             android:layout_column="2"
-            android:text="@string/button_6" />
+            android:text="@string/_6_button_text" />
 
         <Button
             android:id="@+id/sevenButton"
@@ -112,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_row="2"
             android:layout_column="0"
-            android:text="@string/button_7" />
+            android:text="@string/_7_button_text" />
 
         <Button
             android:id="@+id/eightButton"
@@ -120,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_row="2"
             android:layout_column="1"
-            android:text="@string/button_8" />
+            android:text="@string/_8_button_text" />
 
         <Button
             android:id="@+id/nineButton"
@@ -128,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_row="2"
             android:layout_column="2"
-            android:text="@string/button_9" />
+            android:text="@string/_9_button_text" />
     </GridLayout>
 
 </RelativeLayout>
