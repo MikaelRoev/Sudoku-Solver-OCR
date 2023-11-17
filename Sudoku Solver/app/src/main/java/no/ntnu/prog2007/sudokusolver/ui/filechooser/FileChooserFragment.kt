@@ -10,12 +10,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import no.ntnu.prog2007.sudokusolver.FileManager
+import no.ntnu.prog2007.sudokusolver.MainActivity
 import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentFilechooserBinding
 import no.ntnu.prog2007.sudokusolver.game.Board.Companion.fromGridToCells
-import no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment
 
 class FileChooserFragment : Fragment() {
     companion object {
@@ -24,10 +24,6 @@ class FileChooserFragment : Fragment() {
 
     private lateinit var binding: FragmentFilechooserBinding
 
-    private val getContent =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let { handleSelectedFile(it) }
-        }
     private var chosenSudokuGrid: List<List<Int>>? = null
 
     override fun onCreateView(
@@ -46,6 +42,10 @@ class FileChooserFragment : Fragment() {
      * Opens a file chooser activity page for choosing a sudoku file.
      */
     private fun openFileChooser() {
+        val getContent = registerForActivityResult(ActivityResultContracts.GetContent())
+        { uri: Uri? ->
+            uri?.let { handleSelectedFile(it) }
+        }
         getContent.launch("*/*")
     }
 
@@ -74,6 +74,8 @@ class FileChooserFragment : Fragment() {
         } catch (e: Exception) {
             Log.e("handleActivityResult", "Error processing file", e)
             showToast("Error processing file")
+            openFileChooser()
+            return
         }
     }
 
@@ -81,14 +83,18 @@ class FileChooserFragment : Fragment() {
      * Changes the fragment to the insert fragment.
      */
     private fun goToInsertFragment() {
-        val insertFragment = SudokuInsertFragment().apply {
+        val mainActivity = (activity as MainActivity)
+        val insertFragment = mainActivity.sudokuInsertFragment.apply {
             arguments = Bundle().apply {
                 val cells = fromGridToCells(chosenSudokuGrid!!)
                 putParcelableArrayList(CHOSEN_GRID_KEY, ArrayList(cells))
             }
         }
 
-        findNavController().navigate(R.id.navigation_insert, insertFragment.arguments)
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment_activity_main, insertFragment).commit()
+        val btmNavView = mainActivity.findViewById<BottomNavigationView>(R.id.nav_view)
+        btmNavView.selectedItemId = R.id.navigation_sudoku_insert
     }
 
     /**

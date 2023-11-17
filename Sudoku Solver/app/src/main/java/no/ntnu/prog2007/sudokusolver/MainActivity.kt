@@ -14,7 +14,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var homeFragment: HomeFragment
-    private lateinit var sudokuInsertFragment: SudokuInsertFragment
+    lateinit var sudokuInsertFragment: SudokuInsertFragment
+        private set
     private lateinit var fileChooserFragment: FileChooserFragment
     private lateinit var infoFragment: InfoFragment
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.navigation_home -> replaceFragment(homeFragment)
-                R.id.navigation_insert -> replaceFragment(sudokuInsertFragment)
+                R.id.navigation_sudoku_insert -> replaceFragment(sudokuInsertFragment)
                 R.id.navigation_file_selector -> replaceFragment(fileChooserFragment)
                 R.id.navigation_info -> replaceFragment(infoFragment)
                 else -> {
