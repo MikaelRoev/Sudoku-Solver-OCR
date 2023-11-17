@@ -3,5 +3,11 @@
     <style name="Base.Theme.SudokuSolver" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <item name="android:background">@color/white_background</item>
+        <item name="colorPrimary">@color/grey</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+
+        <item name="android:statusBarColor" >@color/black</item>
+        <item name="android:navigationBarColor" >@color/black</item>
     </style>
 </resources>
