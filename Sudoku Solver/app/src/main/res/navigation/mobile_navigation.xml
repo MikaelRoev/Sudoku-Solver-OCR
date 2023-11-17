@@ -9,13 +9,17 @@
         android:id="@+id/navigation_home"
         android:name="no.ntnu.prog2007.sudokusolver.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/activity_home" />
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_insert"
         android:name="no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment"
         android:label="@string/title_insert"
-        tools:layout="@layout/fragment_sudoku_insert" />
+        tools:layout="@layout/fragment_sudoku_insert" >
+        <action
+            android:id="@+id/action_navigation_insert_to_sudokuSolvedFragment"
+            app:destination="@id/sudokuSolvedFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_filechooser"
@@ -29,5 +33,10 @@
         android:label="@string/title_info"
         tools:layout="@layout/fragment_info"
         />
+    <fragment
+        android:id="@+id/sudokuSolvedFragment"
+        android:name="no.ntnu.prog2007.sudokusolver.ui.solved.SudokuSolvedFragment"
+        android:label="fragment_sudoku_solved"
+        tools:layout="@layout/fragment_sudoku_solved" />
 
 </navigation>
