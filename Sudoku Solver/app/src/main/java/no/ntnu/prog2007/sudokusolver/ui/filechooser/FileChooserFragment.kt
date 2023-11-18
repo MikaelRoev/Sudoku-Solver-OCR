@@ -51,6 +51,8 @@ class FileChooserFragment : Fragment() {
                 result.data?.data?.let { uri ->
                     handleSelectedFile(uri)
                 }
+            } else {
+                parentFragmentManager.popBackStack()
             }
         }
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {

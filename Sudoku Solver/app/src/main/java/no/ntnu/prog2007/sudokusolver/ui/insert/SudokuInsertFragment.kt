@@ -187,6 +187,10 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
         }
     }
 
+    /**
+     * Saves the cells to file
+     * @param fileName of the file
+     */
     private fun saveToFile(fileName: String) {
         val directoryName = getString(R.string.files_dir)
 
