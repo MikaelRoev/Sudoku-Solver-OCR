@@ -1,5 +1,7 @@
 package no.ntnu.prog2007.sudokusolver.ui.filechooser
 
+import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
@@ -16,6 +18,7 @@ import no.ntnu.prog2007.sudokusolver.MainActivity
 import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentFilechooserBinding
 import no.ntnu.prog2007.sudokusolver.game.Board.Companion.fromGridToCells
+import java.io.File
 
 class FileChooserFragment : Fragment() {
     companion object {
@@ -42,11 +45,28 @@ class FileChooserFragment : Fragment() {
      * Opens a file chooser activity page for choosing a sudoku file.
      */
     private fun openFileChooser() {
-        val getContent = registerForActivityResult(ActivityResultContracts.GetContent())
-        { uri: Uri? ->
-            uri?.let { handleSelectedFile(it) }
+        val getContent = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    handleSelectedFile(uri)
+                }
+            }
         }
-        getContent.launch("*/*")
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+            putExtra(Intent.EXTRA_TITLE, "Select a file")
+            val initialDirectory = File(requireContext().filesDir, getString(R.string.files_dir))
+            if (!initialDirectory.exists()) {
+                initialDirectory.mkdirs()
+            }
+            putExtra(
+                "android.content.extra.SHOW_ADVANCED",
+                File(initialDirectory, "your_file_name").absolutePath
+            )
+        }
+        getContent.launch(intent)
     }
 
     /**

@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import no.ntnu.prog2007.sudokusolver.FileManager
 import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.Sudoku
 import no.ntnu.prog2007.sudokusolver.ui.solved.SudokuSolvedFragment
@@ -19,6 +21,7 @@ import no.ntnu.prog2007.sudokusolver.game.Cell
 import no.ntnu.prog2007.sudokusolver.ui.filechooser.FileChooserFragment.Companion.CHOSEN_GRID_KEY
 import no.ntnu.prog2007.sudokusolver.view.SudokuBoard
 import no.ntnu.prog2007.sudokusolver.view.SudokuViewModel
+import java.io.File
 
 /**
  * A Fragment that contains the Sudoku board and buttons for inputting numbers.
@@ -79,6 +82,7 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
         // The solve and clear buttons
         binding.solveButton.setOnClickListener { solveSudokuAndChangeFragment() }
         binding.clearButton.setOnClickListener { clearSudokuBoard()}
+        binding.saveButton.setOnClickListener { saveToFile("savingTest") }
 
         return fragmentBinding.root
     }
@@ -114,7 +118,7 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
         val cells = viewModel.sudokuGame.getCells()
         // Converts the cells to a grid of integers so that it is compatible with the Sudoku class.
         val grid = Board.fromCellsToGrid(cells)
-        val sudoku = Sudoku()
+        val sudoku = Sudoku(grid)
         // Solves the Sudoku
         sudoku.solve()
         if (sudoku.solved) {
@@ -180,6 +184,24 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
                     }
                 }
             }
+        }
+    }
+
+    private fun saveToFile(fileName: String) {
+        val directoryName = getString(R.string.files_dir)
+
+        val fileDirectory = File(requireContext().filesDir, directoryName)
+        // Create the directory if it doesn't exist
+        if (!fileDirectory.exists()) {
+            fileDirectory.mkdirs()
+        }
+
+        val filepath = File(fileDirectory, "$fileName.spf").absolutePath
+        if (FileManager.writeFileSPF(filepath,
+                Board.fromCellsToGrid(viewModel.sudokuGame.getCells()))) {
+            Toast.makeText(requireContext(), "File saved successfully", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Error saving file", Toast.LENGTH_SHORT).show()
         }
     }
 

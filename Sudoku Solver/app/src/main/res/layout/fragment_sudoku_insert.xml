@@ -29,6 +29,13 @@
             android:layout_marginHorizontal="30dp"
             android:text="@string/clear_board_button_text" />
         <Button
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginHorizontal="30dp"
+            android:text="@string/save_button_text" />
+        <Button
             android:id="@+id/solveButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
