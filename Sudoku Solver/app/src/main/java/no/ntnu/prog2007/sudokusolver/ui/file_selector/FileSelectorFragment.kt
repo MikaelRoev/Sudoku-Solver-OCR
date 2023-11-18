@@ -1,4 +1,4 @@
-package no.ntnu.prog2007.sudokusolver.ui.filechooser
+package no.ntnu.prog2007.sudokusolver.ui.file_selector
 
 import android.app.Activity
 import android.content.Intent
@@ -20,7 +20,7 @@ import no.ntnu.prog2007.sudokusolver.databinding.FragmentFilechooserBinding
 import no.ntnu.prog2007.sudokusolver.game.Board.Companion.fromGridToCells
 import java.io.File
 
-class FileChooserFragment : Fragment() {
+class FileSelectorFragment : Fragment() {
     companion object {
         const val CHOSEN_GRID_KEY = "no.ntnu.prog2007.sudokusolver.CHOSEN_GRID_KEY"
     }

@@ -18,7 +18,7 @@ import no.ntnu.prog2007.sudokusolver.ui.solved.SudokuSolvedFragment
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentSudokuInsertBinding
 import no.ntnu.prog2007.sudokusolver.game.Board
 import no.ntnu.prog2007.sudokusolver.game.Cell
-import no.ntnu.prog2007.sudokusolver.ui.filechooser.FileChooserFragment.Companion.CHOSEN_GRID_KEY
+import no.ntnu.prog2007.sudokusolver.ui.file_selector.FileSelectorFragment.Companion.CHOSEN_GRID_KEY
 import no.ntnu.prog2007.sudokusolver.view.SudokuBoard
 import no.ntnu.prog2007.sudokusolver.view.SudokuViewModel
 import java.io.File

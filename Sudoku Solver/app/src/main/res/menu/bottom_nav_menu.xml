@@ -14,7 +14,7 @@
     <item
         android:id="@+id/navigation_file_selector"
         android:icon="@drawable/ic_file_selector"
-        android:title="@string/title_filechooser" />
+        android:title="@string/title_file_selector" />
 
     <item
         android:id="@+id/navigation_info"

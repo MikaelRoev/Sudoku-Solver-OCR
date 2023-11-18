@@ -16,7 +16,7 @@
     <string name="reveal_all_numbers_button_text">Reveal all numbers</string>
     <string name="title_home">Home</string>
     <string name="title_insert">Insert sudoku</string>
-    <string name="title_filechooser">Gallery</string>
+    <string name="title_file_selector">Gallery</string>
     <string name="title_info">Information</string>
     <string name="files_dir">sudoku_solver</string>
 </resources>

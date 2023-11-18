@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import no.ntnu.prog2007.sudokusolver.databinding.ActivityMainBinding
-import no.ntnu.prog2007.sudokusolver.ui.filechooser.FileChooserFragment
+import no.ntnu.prog2007.sudokusolver.ui.file_selector.FileSelectorFragment
 import no.ntnu.prog2007.sudokusolver.ui.home.HomeFragment
 import no.ntnu.prog2007.sudokusolver.ui.info.InfoFragment
 import no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var homeFragment: HomeFragment
     lateinit var sudokuInsertFragment: SudokuInsertFragment
         private set
-    private lateinit var fileChooserFragment: FileChooserFragment
+    private lateinit var fileChooserFragment: FileSelectorFragment
     private lateinit var infoFragment: InfoFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         homeFragment = HomeFragment()
         sudokuInsertFragment = SudokuInsertFragment()
-        fileChooserFragment = FileChooserFragment()
+        fileChooserFragment = FileSelectorFragment()
         infoFragment = InfoFragment()
 
         replaceFragment(homeFragment)

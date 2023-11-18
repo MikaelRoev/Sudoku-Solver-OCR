@@ -23,8 +23,8 @@
 
     <fragment
         android:id="@+id/navigation_file_selector"
-        android:name="no.ntnu.prog2007.sudokusolver.ui.filechooser.FileChooserFragment"
-        android:label="@string/title_filechooser"
+        android:name="no.ntnu.prog2007.sudokusolver.ui.file_selector.FileSelectorFragment"
+        android:label="@string/title_file_selector"
         tools:layout="@layout/fragment_filechooser" >
         <action
             android:id="@+id/action_navigation_filechooser_to_navigation_insert"
