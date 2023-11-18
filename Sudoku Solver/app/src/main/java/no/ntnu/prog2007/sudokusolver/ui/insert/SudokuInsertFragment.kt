@@ -164,24 +164,24 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
         val buttons = listOf(binding.deleteButton, binding.oneButton, binding.twoButton,
             binding.threeButton, binding.fourButton, binding.fiveButton,
             binding.sixButton, binding.sevenButton, binding.eightButton, binding.nineButton)
-        buttons.forEachIndexed { index, button ->
+        for (index in buttons.indices)
+        {
+            val button = buttons[index]
             // If the button is the same as the value of the selected cell, it is enabled.
             button.isEnabled = true
-            if (index != selectedCell.value)
-            {
-                // If a number that matches the number on the button is already in the
-                // same row or column, the button is disabled.
-                for (i in 0..8) {
-                    if (cells[selectedCellRow*9+i].value != index && cells[i*9+selectedCellColumn].value != index) continue
+            if (index == selectedCell.value) continue
+            // If a number that matches the number on the button is already in the
+            // same row or column, the button is disabled.
+            for (i in 0..8) {
+                if (cells[selectedCellRow*9+i].value != index && cells[i*9+selectedCellColumn].value != index) continue
+                if (button != binding.deleteButton) button.isEnabled = false
+            }
+            // If a number that matches the number on the button is already in the
+            // same 3x3 square, the button is disabled.
+            for (i in selectedCellRow/3*3..selectedCellRow/3*3+2) {
+                for (j in selectedCellColumn/3*3..selectedCellColumn/3*3+2) {
+                    if (cells[i*9+j].value != index) continue
                     if (button != binding.deleteButton) button.isEnabled = false
-                }
-                // If a number that matches the number on the button is already in the
-                // same 3x3 square, the button is disabled.
-                for (i in selectedCellRow/3*3..selectedCellRow/3*3+2) {
-                    for (j in selectedCellColumn/3*3..selectedCellColumn/3*3+2) {
-                        if (cells[i*9+j].value != index) continue
-                        if (button != binding.deleteButton) button.isEnabled = false
-                    }
                 }
             }
         }
