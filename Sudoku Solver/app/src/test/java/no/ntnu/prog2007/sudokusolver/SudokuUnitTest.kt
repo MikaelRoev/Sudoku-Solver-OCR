@@ -121,6 +121,25 @@ class SudokuUnitTest {
         )
     }
 
+    @Test
+    fun testSolve_tooFewClues() {
+        testSudoku(
+            listOf(
+                listOf(0, 3, 0, /*|*/ 0, 7, 0, /*|*/ 0, 0, 0),
+                listOf(6, 0, 0, /*|*/ 0, 0, 5, /*|*/ 0, 0, 0),
+                listOf(0, 9, 0, /*|*/ 0, 0, 0, /*|*/ 0, 6, 0),
+                //-------------------------------------------
+                listOf(0, 0, 0, /*|*/ 0, 0, 0, /*|*/ 0, 0, 3),
+                listOf(4, 0, 0, /*|*/ 0, 0, 3, /*|*/ 0, 0, 0),
+                listOf(7, 0, 0, /*|*/ 0, 0, 0, /*|*/ 0, 0, 6),
+                //-------------------------------------------
+                listOf(0, 6, 0, /*|*/ 0, 0, 0, /*|*/ 2, 0, 0),
+                listOf(0, 0, 0, /*|*/ 0, 1, 0, /*|*/ 0, 0, 5),
+                listOf(0, 0, 0, /*|*/ 0, 0, 0, /*|*/ 0, 7, 0)
+            ), false
+        )
+    }
+
     private fun testSudoku(grid: List<List<Int>>, solvable: Boolean) {
         val sudoku = Sudoku(grid)
         val startTime = System.currentTimeMillis()

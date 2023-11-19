@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Sudoku Solver</string>
-    <string name="clear_board_button_text">Clear board</string>
+    <string name="clear_board_button_text">Clear</string>
     <string name="solve_button_text">Solve</string>
+    <string name="save_button_text">Save</string>
     <string name="delete_button_text">Delete</string>
     <string name="_1_button_text">1</string>
     <string name="_2_button_text">2</string>
@@ -15,6 +16,8 @@
     <string name="reveal_all_numbers_button_text">Reveal all numbers</string>
     <string name="title_home">Home</string>
     <string name="title_insert">Insert sudoku</string>
-    <string name="title_filechooser">Gallery</string>
+    <string name="title_file_selector">Gallery</string>
     <string name="title_info">Information</string>
+    <string name="files_dir">sudoku_solver</string>
+    <string name="enter_file_name_prompt">Enter file name</string>
 </resources>

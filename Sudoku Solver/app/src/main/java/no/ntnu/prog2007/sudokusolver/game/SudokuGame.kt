@@ -26,6 +26,20 @@ class SudokuGame {
     }
 
     /**
+     * Companion object for the SudokuGame class.
+     * Holds the singleton instance of the SudokuGame class.
+     */
+    companion object {
+        private var instance: SudokuGame? = null
+        fun getInstance(): SudokuGame {
+            if (instance == null) {
+                instance = SudokuGame()
+            }
+            return instance!!
+        }
+    }
+
+    /**
      * Handles the input of a number to a cell.
      * @param number The number to input.
      */
