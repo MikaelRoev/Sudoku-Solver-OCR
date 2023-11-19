@@ -116,7 +116,9 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener {
             }
 
             // Changes the fragment to the SudokuSolvedFragment
-            parentFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_activity_main, sudokuSolvedFragment).commit()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_activity_main, sudokuSolvedFragment)
+                .addToBackStack(null).commit()
 
 
         // If the Sudoku is not solvable, an alert is shown.

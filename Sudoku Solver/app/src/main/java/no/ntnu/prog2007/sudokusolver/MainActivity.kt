@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId) {
                 R.id.navigation_home -> replaceFragment(homeFragment)
                 R.id.navigation_insert -> replaceFragment(sudokuInsertFragment)
-                R.id.navigation_filechooser -> replaceFragment(fileChooserFragment)
+                R.id.navigation_filechooser -> replaceFragment(FileChooserFragment())
                 R.id.navigation_info -> replaceFragment(infoFragment)
                 else -> {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()

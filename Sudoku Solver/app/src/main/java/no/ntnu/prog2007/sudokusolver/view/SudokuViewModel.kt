@@ -8,5 +8,5 @@ import no.ntnu.prog2007.sudokusolver.game.SudokuGame
  * Holds the game state and exposes it to the view.
  */
 class SudokuViewModel() : ViewModel() {
-    val sudokuGame = SudokuGame()
+    val sudokuGame = SudokuGame.getInstance()
 }
