@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Sudoku Solver</string>
-    <string name="clear_board_button_text">Clear board</string>
+    <string name="clear_board_button_text">Clear</string>
     <string name="solve_button_text">Solve</string>
     <string name="save_button_text">Save</string>
     <string name="delete_button_text">Delete</string>
