@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import no.ntnu.prog2007.sudokusolver.MainActivity
+import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -17,26 +20,43 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+    override fun onCreateView(inflater: LayoutInflater,
+        container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        binding.insertButton.setOnClickListener{onInsertButtonClick()}
+        binding.galleryButton.setOnClickListener{onGalleryButtonClick()}
+        binding.infoButton.setOnClickListener{onInfoButtonClick()}
+
         return root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    fun onInsertButtonClick() {
+        val mainActivity = (activity as MainActivity)
+        val btmNavView = mainActivity.findViewById<BottomNavigationView>(R.id.nav_view)
+        btmNavView.selectedItemId = R.id.navigation_sudoku_insert
+    }
+
+    fun onGalleryButtonClick() {
+        val mainActivity = (activity as MainActivity)
+        val btmNavView = mainActivity.findViewById<BottomNavigationView>(R.id.nav_view)
+        btmNavView.selectedItemId = R.id.navigation_file_selector
+    }
+
+    fun onInfoButtonClick(){
+        val mainActivity = (activity as MainActivity)
+        val btmNavView = mainActivity.findViewById<BottomNavigationView>(R.id.nav_view)
+        btmNavView.selectedItemId = R.id.navigation_info
+    }
+
+
 }
