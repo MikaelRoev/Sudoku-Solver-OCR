@@ -20,4 +20,8 @@
     <string name="title_info">Information</string>
     <string name="files_dir">sudoku_solver</string>
     <string name="enter_file_name_prompt">Enter file name</string>
+    <string name="welcomeText">Welcome to the Sudoku Solver!</string>
+    <string name="insertButtonText">Insert sudoku</string>
+    <string name="findButtonText">Find sudoku from gallery</string>
+    <string name="infoButtonText">Get more info about this app</string>
 </resources>
