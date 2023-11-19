@@ -9,7 +9,7 @@ import no.ntnu.prog2007.sudokusolver.databinding.ActivityMainBinding
 import no.ntnu.prog2007.sudokusolver.ui.file_selector.FileSelectorFragment
 import no.ntnu.prog2007.sudokusolver.ui.home.HomeFragment
 import no.ntnu.prog2007.sudokusolver.ui.info.InfoFragment
-import no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment
+import no.ntnu.prog2007.sudokusolver.ui.insert_and_solve.SudokuInsertFragment
 import java.io.File
 
 class MainActivity : AppCompatActivity() {

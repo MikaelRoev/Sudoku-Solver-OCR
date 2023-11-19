@@ -1,4 +1,4 @@
-package no.ntnu.prog2007.sudokusolver.ui.solved
+package no.ntnu.prog2007.sudokusolver.ui.insert_and_solve
 
 import android.os.Build
 import android.os.Bundle
@@ -11,10 +11,9 @@ import no.ntnu.prog2007.sudokusolver.MainActivity
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentSudokuSolvedBinding
 import no.ntnu.prog2007.sudokusolver.game.Board
 import no.ntnu.prog2007.sudokusolver.game.Cell
-import no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment.Companion.SOLVED_CELLS_KEY
+import no.ntnu.prog2007.sudokusolver.ui.insert_and_solve.SudokuInsertFragment.Companion.SOLVED_CELLS_KEY
 import no.ntnu.prog2007.sudokusolver.ui.save_dialog.SavingFragment
 import no.ntnu.prog2007.sudokusolver.view.SudokuBoard
-import no.ntnu.prog2007.sudokusolver.view.SudokuViewModel
 
 
 /**
@@ -48,6 +47,10 @@ class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener,
         viewModel.sudokuGame.setCells(solvedCells?: listOf())
 
         binding.revealAllButton.setOnClickListener { revealAllSolvedCells() }
+
+        binding.saveButton.setOnClickListener {
+
+        }
 
         return fragmentBinding.root
     }

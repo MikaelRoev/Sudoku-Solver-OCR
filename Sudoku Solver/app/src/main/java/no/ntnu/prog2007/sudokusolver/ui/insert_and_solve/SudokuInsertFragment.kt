@@ -1,4 +1,4 @@
-package no.ntnu.prog2007.sudokusolver.ui.insert
+package no.ntnu.prog2007.sudokusolver.ui.insert_and_solve
 
 import android.app.AlertDialog
 import android.os.Build
@@ -13,14 +13,12 @@ import androidx.lifecycle.ViewModelProvider
 import no.ntnu.prog2007.sudokusolver.MainActivity
 import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.Sudoku
-import no.ntnu.prog2007.sudokusolver.ui.solved.SudokuSolvedFragment
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentSudokuInsertBinding
 import no.ntnu.prog2007.sudokusolver.game.Board
 import no.ntnu.prog2007.sudokusolver.game.Cell
 import no.ntnu.prog2007.sudokusolver.ui.file_selector.FileSelectorFragment.Companion.CHOSEN_GRID_KEY
 import no.ntnu.prog2007.sudokusolver.ui.save_dialog.SavingFragment
 import no.ntnu.prog2007.sudokusolver.view.SudokuBoard
-import no.ntnu.prog2007.sudokusolver.view.SudokuViewModel
 
 /**
  * A Fragment that contains the Sudoku board and buttons for inputting numbers.

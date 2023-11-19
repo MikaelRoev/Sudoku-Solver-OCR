@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_sudoku_insert"
-        android:name="no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment"
+        android:name="no.ntnu.prog2007.sudokusolver.ui.insert_and_solve.SudokuInsertFragment"
         android:label="@string/title_insert"
         tools:layout="@layout/fragment_sudoku_insert" >
         <action
@@ -25,7 +25,7 @@
         android:id="@+id/navigation_file_selector"
         android:name="no.ntnu.prog2007.sudokusolver.ui.file_selector.FileSelectorFragment"
         android:label="@string/title_file_selector"
-        tools:layout="@layout/fragment_filechooser" >
+        tools:layout="@layout/fragment_file_selector" >
         <action
             android:id="@+id/action_navigation_filechooser_to_navigation_insert"
             app:destination="@id/navigation_sudoku_insert" />
@@ -39,7 +39,7 @@
         />
     <fragment
         android:id="@+id/navigation_sudoku_solved"
-        android:name="no.ntnu.prog2007.sudokusolver.ui.solved.SudokuSolvedFragment"
+        android:name="no.ntnu.prog2007.sudokusolver.ui.insert_and_solve.SudokuSolvedFragment"
         android:label="fragment_sudoku_solved"
         tools:layout="@layout/fragment_sudoku_solved" />
 

@@ -1,4 +1,4 @@
-package no.ntnu.prog2007.sudokusolver.view
+package no.ntnu.prog2007.sudokusolver.ui.insert_and_solve
 
 import androidx.lifecycle.ViewModel
 import no.ntnu.prog2007.sudokusolver.game.SudokuGame
