@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import no.ntnu.prog2007.sudokusolver.MainActivity
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentSudokuSolvedBinding
+import no.ntnu.prog2007.sudokusolver.game.Board
 import no.ntnu.prog2007.sudokusolver.game.Cell
 import no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment.Companion.SOLVED_CELLS_KEY
+import no.ntnu.prog2007.sudokusolver.ui.save_dialog.SavingFragment
 import no.ntnu.prog2007.sudokusolver.view.SudokuBoard
 import no.ntnu.prog2007.sudokusolver.view.SudokuViewModel
 
@@ -17,7 +20,8 @@ import no.ntnu.prog2007.sudokusolver.view.SudokuViewModel
 /**
  * A Fragment that contains the Solved Sudoku board.
  */
-class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener {
+class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener,
+    SavingFragment.SavingDialogListener {
     private lateinit var binding: FragmentSudokuSolvedBinding
     private lateinit var viewModel: SudokuViewModel
 
@@ -84,6 +88,11 @@ class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener {
      */
     private fun revealAllSolvedCells() {
         binding.sudokuBoard.revealAllSolvedCells()
+    }
+
+    override fun onSaveClicked(fileName: String) {
+        val cells = viewModel.sudokuGame.getCells().filter { it.isInputCell || it.isRevealed }
+        (activity as MainActivity).onSaveClicked(fileName, Board.fromCellsToGrid(cells))
     }
 
 }

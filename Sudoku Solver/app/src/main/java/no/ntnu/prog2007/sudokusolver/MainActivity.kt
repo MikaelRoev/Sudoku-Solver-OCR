@@ -2,6 +2,7 @@ package no.ntnu.prog2007.sudokusolver
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import no.ntnu.prog2007.sudokusolver.databinding.ActivityMainBinding
@@ -9,6 +10,7 @@ import no.ntnu.prog2007.sudokusolver.ui.file_selector.FileSelectorFragment
 import no.ntnu.prog2007.sudokusolver.ui.home.HomeFragment
 import no.ntnu.prog2007.sudokusolver.ui.info.InfoFragment
 import no.ntnu.prog2007.sudokusolver.ui.insert.SudokuInsertFragment
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -60,6 +62,29 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    /**
+     * Saves the grid to file
+     * @param fileName of the file
+     * @param grid to be saved
+     */
+     fun onSaveClicked(fileName: String, grid: List<List<Int>>) {
+        val directoryName = getString(R.string.files_dir)
+
+        val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+        val fileDirectory = File(dir, directoryName)
+        // Create the directory if it doesn't exist
+        if (!fileDirectory.exists()) {
+            fileDirectory.mkdirs()
+        }
+
+        val filepath = File(fileDirectory, "$fileName.spf").absolutePath
+        if (FileManager.writeFileSPF(filepath, grid)) {
+            Toast.makeText(this, "File saved successfully", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Error saving file", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

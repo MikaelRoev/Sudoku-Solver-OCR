@@ -19,4 +19,5 @@
     <string name="title_file_selector">Gallery</string>
     <string name="title_info">Information</string>
     <string name="files_dir">sudoku_solver</string>
+    <string name="enter_file_name_prompt">Enter file name</string>
 </resources>
