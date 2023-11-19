@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.filechooser.FileChooserFragment">
+    tools:context=".ui.file_selector.FileSelectorFragment">
 
     <TextView
         android:id="@+id/textFileChooser"
