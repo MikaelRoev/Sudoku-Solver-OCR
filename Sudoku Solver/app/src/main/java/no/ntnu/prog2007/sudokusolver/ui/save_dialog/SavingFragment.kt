@@ -27,7 +27,7 @@ class SavingFragment(private val listener: SavingDialogListener) : DialogFragmen
         fragmentBinding.buttonSave.setOnClickListener {
             // Notify the listener (hosting activity or fragment) that the save button is clicked
             val fileName = fragmentBinding.editTextFileName.text.toString().trim()
-            if (fileName == "")
+            if (fileName.isBlank())
                 Toast.makeText(requireContext(),
                         R.string.enter_file_name_prompt, Toast.LENGTH_SHORT).show()
             else {
@@ -40,7 +40,8 @@ class SavingFragment(private val listener: SavingDialogListener) : DialogFragmen
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        // Use the Builder class for convenient dialog construction
-        return Dialog(requireContext(), R.style.Theme_SudokuSolver)
+        val dialog = Dialog(requireContext(), R.style.Theme_SudokuSolver)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        return dialog
     }
 }
