@@ -49,7 +49,8 @@ class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener,
         binding.revealAllButton.setOnClickListener { revealAllSolvedCells() }
 
         binding.saveButton.setOnClickListener {
-
+            val saveDialog = SavingFragment(this)
+            saveDialog.show(parentFragmentManager, "savingFragmentTag")
         }
 
         return fragmentBinding.root
@@ -94,8 +95,21 @@ class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener,
     }
 
     override fun onSaveClicked(fileName: String) {
-        val cells = viewModel.sudokuGame.getCells().filter { it.isInputCell || it.isRevealed }
-        (activity as MainActivity).onSaveClicked(fileName, Board.fromCellsToGrid(cells))
+        val cells = viewModel.sudokuGame.getCells()
+        val grid = mutableListOf<MutableList<Int>>()
+        for (row in 0..8) {
+            val newRow = mutableListOf<Int>()
+            for (col in 0..8) {
+                val cell = cells[row*9+col]
+                if (cell.isInputCell || cell.isRevealed) {
+                    newRow.add(cell.value)
+                } else {
+                    newRow.add(0)
+                }
+            }
+            grid.add(newRow)
+        }
+        (activity as MainActivity).onSaveClicked(fileName, grid)
     }
 
 }
