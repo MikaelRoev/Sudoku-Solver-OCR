@@ -41,7 +41,10 @@ class SavingFragment(private val listener: SavingDialogListener) : DialogFragmen
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = Dialog(requireContext(), R.style.Theme_SudokuSolver)
-        dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val window = dialog.window
+        window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT)
+        window?.attributes?.y = -100
         return dialog
     }
 }
