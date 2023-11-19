@@ -56,6 +56,17 @@ class Sudoku() {
      * Solves the sudoku grid. Checks if there are more than one solution.
      */
     fun solve() {
+        if (!hasAtLeastMinimumClues()) {
+            solved = false
+            return
+        }
+        solveRecursive()
+    }
+
+    /**
+     * The recursive function that solves the sudoku. Checks if there are more than one solution.
+     */
+    private fun solveRecursive() {
         val cell = findLeastSolutionCell()
         val row = cell.first
         val col = cell.second
@@ -73,7 +84,7 @@ class Sudoku() {
             values.forEach {
                 val value = it.second
                 grid[row][col] = value
-                solve()
+                solveRecursive()
                 if (multipleSolutions) return
                 grid[row][col] = 0
             }
