@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         private set
     private lateinit var fileChooserFragment: FileSelectorFragment
     private lateinit var infoFragment: InfoFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -71,7 +72,6 @@ class MainActivity : AppCompatActivity() {
      */
      fun onSaveClicked(fileName: String, grid: List<List<Int>>) {
         val directoryName = getString(R.string.files_dir)
-
         val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
         val fileDirectory = File(dir, directoryName)
         // Create the directory if it doesn't exist
@@ -79,12 +79,12 @@ class MainActivity : AppCompatActivity() {
             fileDirectory.mkdirs()
         }
 
-        val filepath = File(fileDirectory, "$fileName.spf").absolutePath
+        val name = "$fileName.spf"
+        val filepath = File(fileDirectory, name).absolutePath
         if (FileManager.writeFileSPF(filepath, grid)) {
-            Toast.makeText(this, "File saved successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "$name saved successfully", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "Error saving file", Toast.LENGTH_SHORT).show()
         }
     }
-
 }

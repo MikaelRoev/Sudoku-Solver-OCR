@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import android.util.Log
 import android.view.LayoutInflater
@@ -59,14 +61,15 @@ class FileSelectorFragment : Fragment() {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "*/*"
             putExtra(Intent.EXTRA_TITLE, "Select a file")
-            val initialDirectory = File(requireContext().filesDir, getString(R.string.files_dir))
+
+            val directoryName = getString(R.string.files_dir)
+            val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+            val initialDirectory = File(dir, directoryName)
             if (!initialDirectory.exists()) {
                 initialDirectory.mkdirs()
             }
-            putExtra(
-                "android.content.extra.SHOW_ADVANCED",
-                File(initialDirectory, "your_file_name").absolutePath
-            )
+
+            putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.fromFile(initialDirectory))
         }
         getContent.launch(intent)
     }
