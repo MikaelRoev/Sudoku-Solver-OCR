@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import no.ntnu.prog2007.sudokusolver.FileManager
 import no.ntnu.prog2007.sudokusolver.MainActivity
 import no.ntnu.prog2007.sudokusolver.R
-import no.ntnu.prog2007.sudokusolver.databinding.FragmentFilechooserBinding
+import no.ntnu.prog2007.sudokusolver.databinding.FragmentFileSelectorBinding
 import no.ntnu.prog2007.sudokusolver.game.Board.Companion.fromGridToCells
 import java.io.File
 
@@ -27,7 +27,7 @@ class FileSelectorFragment : Fragment() {
         const val CHOSEN_GRID_KEY = "no.ntnu.prog2007.sudokusolver.CHOSEN_GRID_KEY"
     }
 
-    private lateinit var binding: FragmentFilechooserBinding
+    private lateinit var binding: FragmentFileSelectorBinding
 
     private var chosenSudokuGrid: List<List<Int>>? = null
 
@@ -36,7 +36,7 @@ class FileSelectorFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFilechooserBinding.inflate(inflater, container, false)
+        binding = FragmentFileSelectorBinding.inflate(inflater, container, false)
 
         openFileChooser()
 
