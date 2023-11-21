@@ -2,12 +2,22 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SudokuSolver" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <item name="android:background">@color/white_background</item>
-        <item name="colorPrimary">@color/grey</item>
+
+        <!-- The background color -->
+        <item name="android:background">@color/black</item>
+        <!-- The opening color -->
+        <item name="android:windowBackground">@color/blue2</item>
+        <!-- The buttons in the bottom navigation bar -->
+        <item name="colorSecondaryContainer">@color/blue2</item>
+
+        <!-- The buttons -->
+        <item name="colorPrimary">@color/blue1</item>
+        <!-- The text in the buttons -->
         <item name="colorOnPrimary">@color/black</item>
 
-
+        <!-- The status bar, takes the primary color if not set -->
         <item name="android:statusBarColor" >@color/black</item>
-        <item name="android:navigationBarColor" >@color/black</item>
+        <!-- The color of the text -->
+        <item name="android:textColor">@color/white_background</item>
     </style>
 </resources>
