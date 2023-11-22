@@ -21,7 +21,19 @@
     <string name="files_dir">sudoku_solver</string>
     <string name="enter_file_name_prompt">Enter file name</string>
     <string name="welcomeText">Welcome to the Sudoku Solver!</string>
-    <string name="insertButtonText">Insert sudoku</string>
     <string name="findButtonText">Find sudoku from gallery</string>
     <string name="infoButtonText">Get more info about this app</string>
+    <string name="info_text">Here is the information about the sudoku solver app!
+        \nThe first step to start solving the sudoku is to insert it to the application. That can be done under the insert page.
+        \n1. Click \'%1$s\'
+        \n2. Click on a selected cell, and the number of choice
+        \n\nAfter inserting all the numbers you know, you can solve it, and reveal the numbers of your choice!
+        \n1. Click \'%2$s\'
+        \n2. You will be sent to the solved sudoku
+        \n3. Click on a selected cell to reveal the number underneath
+        \n\nYou can save your sudoku in any part of the possess. Both before solving, and after revealing any of the cells.
+        \n\nIf you want to come back later and continue on you sudoku, you can find it in the file chooser page.
+        \n1. Click \'%3$s\', this can be done both from the main page, and the menu bar
+        \n2. All your saved sudokus will now be displayed. Click on the selected one
+        \n3. You can now keep revealing the numbers, and keep solving!</string>
 </resources>

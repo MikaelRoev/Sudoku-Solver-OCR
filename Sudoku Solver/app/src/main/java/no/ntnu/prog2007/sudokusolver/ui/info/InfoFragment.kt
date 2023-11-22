@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentInfoBinding
 
 /**
@@ -23,17 +22,14 @@ class InfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val infoViewModel =
-            ViewModelProvider(this).get(InfoViewModel::class.java)
-
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textInfo
-        infoViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        binding.textInfo.text =
+            getString(R.string.info_text,
+                getString(R.string.title_insert),
+                getString(R.string.title_home),
+                getString(R.string.title_file_selector))
+        return binding.root
     }
 
     override fun onDestroyView() {
