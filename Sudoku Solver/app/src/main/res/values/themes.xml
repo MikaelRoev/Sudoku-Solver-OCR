@@ -29,4 +29,7 @@
         <item name="android:textColorHint">@color/black</item>
     </style>
     <style name="Theme.SudokuSolver" parent="Base.Theme.SudokuSolver" />
+    <style name="myAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

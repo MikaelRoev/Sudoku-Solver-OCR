@@ -141,8 +141,8 @@ class SudokuInsertFragment : Fragment(), SudokuBoard.OnTouchListener, SavingFrag
 
         // If the Sudoku is not solvable, an alert is shown.
         } else {
-            val unsolvableAlert = AlertDialog.Builder(context).setMessage(
-                "This Sudoku is not solvable\n" +
+            val unsolvableAlert = AlertDialog.Builder(context, R.style.myAlertDialogStyle).setMessage(
+                "This Sudoku  puzzle is not solvable\n" +
                     "Please try again")
                 .setPositiveButton("OK") { _, _ -> }.create()
             unsolvableAlert.show()

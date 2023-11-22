@@ -21,7 +21,6 @@
         <item name="android:textColor">@color/black</item>
         <!-- Theming the Bottom Navigation Bar-->
         <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView.Colored</item>
-
         <item name="editTextStyle">@style/App_EditTextStyle</item>
     </style>
     <style name="App_EditTextStyle" parent="Widget.AppCompat.EditText">
@@ -29,4 +28,7 @@
         <item name="android:textColorHint">@color/black</item>
     </style>
     <style name="Theme.SudokuSolver" parent="Base.Theme.SudokuSolver" />
+    <style name="myAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>
