@@ -21,11 +21,11 @@ class InfoViewModel : ViewModel() {
                 "3. Click on a selected cell to reveal the number underneath\n\n" +
                 "You can save your sudoku in any part of the prosess. Both before solving, " +
                 "and after revealing any of the cells.\n\n" +
-                "If you want to come back later and continue on you sudoku, you can find it" +
+                "If you want to come back later and continue on you sudoku, you can find it " +
                 "in the file chooser page.\n" +
                 "1. Click 'file chooser', this can be done both from the main page, and the " +
                 "menu bar\n" +
-                "2. All your saved sudokus will now be displayed. Click on the selected one\n" +
+                "2. All your saved sudoku's will now be displayed. Click on the selected one\n" +
                 "3. You can now keep revealing the numbers, and keep solving!"
     }
     val text: LiveData<String> = _text
