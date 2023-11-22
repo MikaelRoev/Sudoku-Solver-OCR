@@ -19,6 +19,7 @@
         <item name="android:statusBarColor" >@color/black</item>
         <!-- The color of the text -->
         <item name="android:textColor">@color/black</item>
+
     </style>
 
     <style name="Theme.SudokuSolver" parent="Base.Theme.SudokuSolver" />

@@ -7,8 +7,11 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContextCompat
+import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.game.Cell
 import kotlin.math.min
 
