@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:shadowColor="@color/blue1"
+        android:shadowColor="@color/blue"
         android:drawableLeft="@drawable/ic_insert_sudoku"/>
 
     <Button
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:shadowColor="@color/blue1"
+        android:shadowColor="@color/blue"
         android:drawableLeft="@drawable/ic_file_selector"/>
 
     <Button
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:shadowColor="@color/blue1"
+        android:shadowColor="@color/blue"
         android:drawableLeft="@drawable/ic_info"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

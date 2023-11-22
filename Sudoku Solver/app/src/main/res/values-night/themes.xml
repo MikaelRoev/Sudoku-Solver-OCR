@@ -6,12 +6,12 @@
         <!-- The background color -->
         <item name="android:background">@color/white_background</item>
         <!-- The opening color -->
-        <item name="android:windowBackground">@color/blue1</item>
+        <item name="android:windowBackground">@color/blue</item>
         <!-- The buttons in the bottom navigation bar -->
-        <item name="colorSecondaryContainer">@color/blue1</item>
+        <item name="colorSecondaryContainer">@color/blue</item>
 
         <!-- The buttons -->
-        <item name="colorPrimary">@color/blue1</item>
+        <item name="colorPrimary">@color/blue</item>
         <!-- The text in the buttons -->
         <item name="colorOnPrimary">@color/black</item>
 
