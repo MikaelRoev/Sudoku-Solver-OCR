@@ -1,4 +1,4 @@
-package no.ntnu.prog2007.sudokusolver
+package no.ntnu.prog2007.sudokusolver.core
 
 import android.util.Log
 import java.io.BufferedReader
@@ -12,7 +12,9 @@ import java.io.InputStream
 /**
  * Manages the reading, writing and deletion of files.
  * Reference for the file formats:
- * https://sudopedia.sudocue.net/index.php/Sudoku_Clipboard_and_File_Formats
+ * https://web.archive.org/web/20131004193458/http://www.setbb.com/phpbb/viewtopic.php?p=1127&mforum=sudoku#1127
+ * http://www.sudocue.net/fileformats.php
+ * https://web.archive.org/web/20111223224131/http://www.sadmansoftware.com/sudoku/faq19.htm
  */
 class FileManager {
     companion object {

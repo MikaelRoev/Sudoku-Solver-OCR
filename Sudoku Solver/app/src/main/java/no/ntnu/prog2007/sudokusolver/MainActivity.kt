@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import no.ntnu.prog2007.sudokusolver.core.FileManager
 import no.ntnu.prog2007.sudokusolver.databinding.ActivityMainBinding
 import no.ntnu.prog2007.sudokusolver.ui.file_selector.FileSelectorFragment
 import no.ntnu.prog2007.sudokusolver.ui.home.HomeFragment
@@ -12,6 +13,9 @@ import no.ntnu.prog2007.sudokusolver.ui.info.InfoFragment
 import no.ntnu.prog2007.sudokusolver.ui.insert_and_solve.SudokuInsertFragment
 import java.io.File
 
+/**
+ * The main activity that displays the hole application.
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

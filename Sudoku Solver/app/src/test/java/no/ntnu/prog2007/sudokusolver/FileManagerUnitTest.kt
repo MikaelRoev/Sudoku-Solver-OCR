@@ -1,5 +1,6 @@
 package no.ntnu.prog2007.sudokusolver
 
+import no.ntnu.prog2007.sudokusolver.core.FileManager
 import org.junit.AfterClass
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -34,7 +35,8 @@ class FileManagerUnitTest {
     @Test
     fun testReadFile_msk() {
         val fileName = "test.msk"
-        assertTrue(FileManager.writeFile(fileName,
+        assertTrue(
+            FileManager.writeFile(fileName,
             "800000000\r\n" +
                 "003600000\r\n" +
                 "070090200\r\n" +
@@ -51,7 +53,8 @@ class FileManagerUnitTest {
     @Test
     fun testReadFile_sol() {
         val fileName = "test.sol"
-        assertTrue(FileManager.writeFile(fileName,
+        assertTrue(
+            FileManager.writeFile(fileName,
             "800000000\r\n" +
                     "003600000\r\n" +
                     "070090200\r\n" +
@@ -68,7 +71,8 @@ class FileManagerUnitTest {
     @Test
     fun testReadFile_sdk() {
         val fileName = "test.sdk"
-        assertTrue(FileManager.writeFile(fileName,
+        assertTrue(
+            FileManager.writeFile(fileName,
             "[Puzzle]\r\n"+
                     "800000000\r\n" +
                     "003600000\r\n" +
@@ -86,7 +90,8 @@ class FileManagerUnitTest {
     @Test
     fun testReadFile_txt() {
         val fileName = "test.txt"
-        assertTrue(FileManager.writeFile(fileName,
+        assertTrue(
+            FileManager.writeFile(fileName,
             "\r\n800000000003600000070090200050007000000045700000100030001000068008500010090000400\r\n"))
         fileNames.add(fileName)
         assertEquals(resultingGrid, FileManager.readFile(File(fileName)))
@@ -94,7 +99,8 @@ class FileManagerUnitTest {
     @Test
     fun testReadFile_sdm() {
         val fileName = "test.sdm"
-        assertTrue(FileManager.writeFile(fileName,
+        assertTrue(
+            FileManager.writeFile(fileName,
             "\r\n800000000003600000070090200050007000000045700000100030001000068008500010090000400\r\n"))
         fileNames.add(fileName)
         assertEquals(resultingGrid, FileManager.readFile(File(fileName)))
@@ -103,7 +109,8 @@ class FileManagerUnitTest {
     @Test
     fun testReadFile_spf() {
         val fileName = "test.spf"
-        assertTrue(FileManager.writeFile(fileName,
+        assertTrue(
+            FileManager.writeFile(fileName,
               " 8 . . | . . . | . . .\r\n" +
                      " . . 3 | 6 . . | . . .\r\n" +
                      " . 7 . | . 9 . | 2 . .\r\n" +
@@ -122,7 +129,8 @@ class FileManagerUnitTest {
     @Test
     fun testReadFile_ss() {
         val fileName = "test.ss"
-        assertTrue(FileManager.writeFile(fileName,
+        assertTrue(
+            FileManager.writeFile(fileName,
              " *-----------------------*\n" +
                     " | 8 . . | . . . | . . . |\n" +
                     " | . . 3 | 6 . . | . . . |\n" +
@@ -156,7 +164,8 @@ class FileManagerUnitTest {
     @Test
     fun testReadFile_unsupportedFileType() {
         val fileName = "test.bob"
-        assertTrue(FileManager.writeFile(fileName,
+        assertTrue(
+            FileManager.writeFile(fileName,
             "[Puzzle]\r\n"+
                     "800000000\r\n" +
                     "003600000\r\n" +

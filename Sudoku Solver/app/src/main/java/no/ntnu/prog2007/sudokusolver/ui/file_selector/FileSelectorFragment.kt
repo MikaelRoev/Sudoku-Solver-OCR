@@ -15,13 +15,16 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import no.ntnu.prog2007.sudokusolver.FileManager
+import no.ntnu.prog2007.sudokusolver.core.FileManager
 import no.ntnu.prog2007.sudokusolver.MainActivity
 import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentFileSelectorBinding
 import no.ntnu.prog2007.sudokusolver.game.Board.Companion.fromGridToCells
 import java.io.File
 
+/**
+ * The fragment that represents the file selector page.
+ */
 class FileSelectorFragment : Fragment() {
     companion object {
         const val CHOSEN_GRID_KEY = "no.ntnu.prog2007.sudokusolver.CHOSEN_GRID_KEY"
@@ -152,6 +155,10 @@ class FileSelectorFragment : Fragment() {
         return fileName?.substring(fileName.lastIndexOf(".") + 1)
     }
 
+    /**
+     * Shows a short toast of the sting.
+     * @param string to be shown in the toast.
+     */
     private fun showToast(string: String) {
         Toast.makeText(requireContext(), string, Toast.LENGTH_SHORT).show()
     }

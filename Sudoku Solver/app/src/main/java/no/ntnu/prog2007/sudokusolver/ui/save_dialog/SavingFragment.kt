@@ -10,10 +10,14 @@ import androidx.fragment.app.DialogFragment
 import no.ntnu.prog2007.sudokusolver.R
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentSavingBinding
 
-
+/**
+ * Represents the dialog when a save button is pressed.
+ */
 class SavingFragment(private val listener: SavingDialogListener) : DialogFragment() {
 
-    // Define a listener interface to communicate with the hosting activity or fragment
+    /**
+     * Listener interface to communicate between hosting fragment and the dialog
+     */
     interface SavingDialogListener {
         fun onSaveClicked(fileName: String)
     }
@@ -39,6 +43,9 @@ class SavingFragment(private val listener: SavingDialogListener) : DialogFragmen
         return fragmentBinding.root
     }
 
+    /**
+     * Override function to create the dialog.
+     */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = Dialog(requireContext(), R.style.Theme_SudokuSolver)
         val window = dialog.window

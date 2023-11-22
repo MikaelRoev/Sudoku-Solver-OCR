@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import no.ntnu.prog2007.sudokusolver.MainActivity
 import no.ntnu.prog2007.sudokusolver.R
-import no.ntnu.prog2007.sudokusolver.Sudoku
+import no.ntnu.prog2007.sudokusolver.core.Sudoku
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentSudokuInsertBinding
 import no.ntnu.prog2007.sudokusolver.game.Board
 import no.ntnu.prog2007.sudokusolver.game.Cell

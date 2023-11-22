@@ -1,5 +1,6 @@
 package no.ntnu.prog2007.sudokusolver
 
+import no.ntnu.prog2007.sudokusolver.core.Sudoku
 import org.junit.Test
 
 import org.junit.Assert.*

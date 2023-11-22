@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentInfoBinding
 
+/**
+ * Fragment that represents the info page.
+ */
 class InfoFragment : Fragment() {
     private var _binding: FragmentInfoBinding? = null
 

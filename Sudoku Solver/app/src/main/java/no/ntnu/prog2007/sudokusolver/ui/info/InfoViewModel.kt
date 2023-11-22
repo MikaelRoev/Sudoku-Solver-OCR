@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
+/**
+ * View model for the info page.
+ */
 class InfoViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
         value = "Here is the information about the sudoku solver app!\n" +

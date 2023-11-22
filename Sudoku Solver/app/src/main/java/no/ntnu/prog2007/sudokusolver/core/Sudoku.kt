@@ -1,7 +1,8 @@
-package no.ntnu.prog2007.sudokusolver
+package no.ntnu.prog2007.sudokusolver.core
 
 /**
- * Represents a sudoku grid.
+ * Represents a sudoku grid used when solving the algorithm.
+ * Based on c++ code written by Togrim Thorsen.
  */
 class Sudoku() {
 
@@ -126,6 +127,7 @@ class Sudoku() {
      * Solves the sudoku grid. Finds the first solution and changes the grid to it.
      * @return true if the grid was solved or false if the grid is unsolvable.
      */
+    @Deprecated("Replaced by solve()")
     fun solveFindFirst(): Boolean {
         val cell = findLeastSolutionCell()
         val row = cell.first
@@ -234,7 +236,7 @@ class Sudoku() {
     }
 
     /**
-     * Finds all valid numbers in a cell and sorts them by number of conflicts.
+     * Finds all valid numbers in a cell and sorts them by number of conflicts lowest first.
      * @param row is the row of the cell.
      * @param col is the column of the cell.
      * @return a sorted list of all valid values in pairs of number of conflicts and value.
@@ -251,6 +253,12 @@ class Sudoku() {
         return values
     }
 
+    /**
+     * Converts a grid to a string.
+     * Used in tests.
+     *
+     * @param grid The grid to be converted to a string.
+     */
     private fun gridToSting(grid: List<List<Int>>): String {
         val sb = StringBuilder()
         for (row in 0 until n) {
@@ -264,7 +272,15 @@ class Sudoku() {
         return sb.toString()
     }
 
+    /**
+     * Converts the solution to a string.
+     * Used in tests.
+     */
     fun solutionToString() = gridToSting(solution)
 
+    /**
+     * Override function for toString.
+     * Used in tests.
+     */
     override fun toString() = gridToSting(grid)
 }

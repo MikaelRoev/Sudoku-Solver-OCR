@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import no.ntnu.prog2007.sudokusolver.MainActivity
 import no.ntnu.prog2007.sudokusolver.databinding.FragmentSudokuSolvedBinding
-import no.ntnu.prog2007.sudokusolver.game.Board
 import no.ntnu.prog2007.sudokusolver.game.Cell
 import no.ntnu.prog2007.sudokusolver.ui.insert_and_solve.SudokuInsertFragment.Companion.SOLVED_CELLS_KEY
 import no.ntnu.prog2007.sudokusolver.ui.save_dialog.SavingFragment
@@ -94,6 +93,9 @@ class SudokuSolvedFragment : Fragment(), SudokuBoard.OnTouchListener,
         binding.sudokuBoard.revealAllSolvedCells()
     }
 
+    /**
+     * Defines what happens when the save button is clicked.
+     */
     override fun onSaveClicked(fileName: String) {
         val cells = viewModel.sudokuGame.getCells()
         val grid = mutableListOf<MutableList<Int>>()
