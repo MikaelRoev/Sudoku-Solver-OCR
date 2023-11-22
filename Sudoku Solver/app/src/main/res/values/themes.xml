@@ -19,8 +19,8 @@
         <item name="android:statusBarColor" >@color/black</item>
         <!-- The color of the text -->
         <item name="android:textColor">@color/black</item>
-
+        <!-- Theming the Bottom Navigation Bar-->
+        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView.Colored</item>
     </style>
-
     <style name="Theme.SudokuSolver" parent="Base.Theme.SudokuSolver" />
 </resources>
